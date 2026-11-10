@@ -549,6 +549,17 @@ abstract final class AppRoutes {
   static const String togetherWeekly = '/together/weekly';
   static const String togetherGoal = '/together/goal';
 
+  /// «مدار الصغار»: the kids shell's home. While kids mode is on this is the
+  /// ONLY part of the app a location may lead to (see [kidsModeRedirect]);
+  /// everything below it (`/kids/s/<section>`) belongs to the shell too.
+  static const String kids = '/kids';
+
+  /// One kids section (`/kids/s/<id>`), only for sections the child may see.
+  static const String kidsSection = '/kids/s/:id';
+
+  /// Location of the kids section [id].
+  static String kidsSectionOf(String id) => '/kids/s/${Uri.encodeComponent(id)}';
+
   static String _withTab(String path, String? tab, String home) =>
       Uri(path: path, queryParameters: tab == null || tab == home ? null : {'tab': tab}).toString();
 
@@ -573,4 +584,26 @@ String? onboardingRedirect({required bool onboarded, required String location}) 
     return AppRoutes.beforeOnboarding.contains(path) ? null : AppRoutes.onboarding;
   }
   return path == AppRoutes.onboarding ? AppRoutes.home : null;
+}
+
+/// Whether [location] belongs to the kids shell (`/kids` and below). Pure.
+/// `/kidsx`, `/kids/../settings` and `//kids` do not.
+bool isKidsLocation(String location) {
+  final uri = Uri.tryParse(location);
+  if (uri == null) return false;
+  final path = uri.normalizePath().path;
+  return path == AppRoutes.kids || path.startsWith('${AppRoutes.kids}/');
+}
+
+/// The one-way door of «مدار الصغار». Pure – unit-tested.
+///
+/// * Kids mode on → EVERY location that is not the kids shell's (a
+///   notification tap, a deep link, a widget link, a search result, a share, a
+///   restored route, anything pushed by anything) is sent to `/kids`.
+/// * Kids mode off → the kids shell is closed and goes home: it is entered
+///   only by its own card, after a PIN exists.
+String? kidsModeRedirect({required bool kidsOn, required String location}) {
+  final inKids = isKidsLocation(location);
+  if (kidsOn) return inKids ? null : AppRoutes.kids;
+  return inKids ? AppRoutes.home : null;
 }

@@ -11,6 +11,8 @@ import '../../features/gallery/design_gallery_screen.dart';
 import '../../features/hifz/hifz.dart' show HifzCard;
 import '../../features/home/home_screen.dart';
 import '../../features/import/import_screen.dart';
+import '../../features/kids/shell/application/kids_providers.dart' show kidsModeOnProvider;
+import '../../features/kids/shell/kids_routes.dart' show kidsRoutes;
 import '../../features/fasting/fasting.dart' show FastingScreen;
 import '../../features/iqama/iqama.dart' show IqamaSettingsScreen;
 import '../../features/onboarding/onboarding_screen.dart';
@@ -54,12 +56,22 @@ final routerInitialLocationProvider = Provider<String>((ref) => AppRoutes.home);
 final routerProvider = Provider<GoRouter>((ref) {
   final refresh = _RouterRefresh();
   ref.listen(appSettingsProvider.select((s) => s.onboarded), (_, _) => refresh.ping());
+  // Kids mode switching on or off re-runs the redirect for the page that is
+  // open: turning it on moves whatever is showing into the kids shell.
+  ref.listen(kidsModeOnProvider, (_, _) => refresh.ping());
   final router = GoRouter(
     initialLocation: ref.read(routerInitialLocationProvider),
     refreshListenable: refresh,
     debugLogDiagnostics: false,
-    redirect: (context, state) =>
-        onboardingRedirect(onboarded: ref.read(appSettingsProvider).onboarded, location: state.matchedLocation),
+    redirect: (context, state) {
+      // The one-way door comes first: with kids mode on, nothing outside
+      // `/kids/**` is reachable by any route, link, tap or share.
+      final kidsOn = ref.read(kidsModeOnProvider);
+      final kids = kidsModeRedirect(kidsOn: kidsOn, location: state.uri.toString());
+      if (kids != null) return kids;
+      if (kidsOn) return null;
+      return onboardingRedirect(onboarded: ref.read(appSettingsProvider).onboarded, location: state.matchedLocation);
+    },
     onException: (context, state, router) => router.go(AppRoutes.home),
     routes: madarRoutes(),
   );
@@ -998,6 +1010,8 @@ List<RouteBase> madarRoutes() => [
     pageBuilder: (context, state) =>
         MadarTransitions.fadeThrough<void>(context: context, key: state.pageKey, child: const OnboardingScreen()),
   ),
+  // «مدار الصغار»: its own shell, reachable only through its own card.
+  ...kidsRoutes(),
 ];
 
 class _RouterRefresh extends ChangeNotifier {

@@ -1,0 +1,278 @@
+{
+  "kidsShellEntryTitle": {
+    "ar": "مدار الصغار",
+    "en": "Madar Kids",
+    "description": "Title of the kids-mode card at the top of Settings"
+  },
+  "kidsShellEntrySubtitle": {
+    "ar": "مكان آمن للّعب والتعلّم",
+    "en": "A safe place to play and learn"
+  },
+  "kidsShellEntryButton": {
+    "ar": "ادخل",
+    "en": "Enter",
+    "description": "The one tap that puts the phone into kids mode"
+  },
+  "kidsShellEntryRule": {
+    "ar": "الدخول بلمسة وحدة. الخروج بالرقم السري أو البصمة فقط.",
+    "en": "One tap to go in. Only the PIN or the fingerprint gets you out."
+  },
+  "kidsShellNeedPinTitle": {
+    "ar": "لازم رقم سري أول",
+    "en": "A PIN first"
+  },
+  "kidsShellNeedPinBody": {
+    "ar": "قبل ما يدخل الصغار، لازم الأهل يحطّوا رقم سري. هو اللي بيفتح الباب لما يخلصوا.",
+    "en": "Before the children go in, a parent sets a PIN. It is what opens the door when they are done."
+  },
+  "kidsShellNeedPinAction": {
+    "ar": "حطّ الرقم السري",
+    "en": "Set the PIN"
+  },
+  "kidsShellPinOfferBadge": {
+    "ar": "للأهل",
+    "en": "For parents"
+  },
+  "kidsShellPinOfferTitle": {
+    "ar": "نثبّت الشاشة؟",
+    "en": "Pin the screen?"
+  },
+  "kidsShellPinOfferBody": {
+    "ar": "تثبيت الشاشة بيخلّي الجوال على مدار الصغار فقط، وما بيطلع منه إلا الأهل.",
+    "en": "Pinning keeps the phone on Madar Kids only, and only a parent can leave."
+  },
+  "kidsShellPinOfferYes": {
+    "ar": "ثبّت الشاشة",
+    "en": "Pin the screen"
+  },
+  "kidsShellPinOfferNo": {
+    "ar": "مش هلأ، كمّل بدون تثبيت",
+    "en": "Not now, continue without pinning"
+  },
+  "kidsShellPinOfferLater": {
+    "ar": "بتقدر تغيّرها بعدين من إعدادات الأهل.",
+    "en": "You can change this later in the parents' corner."
+  },
+  "kidsShellGreeting": {
+    "ar": "أهلاً يا نجم!",
+    "en": "Hello, star!"
+  },
+  "kidsShellGreetingSub": {
+    "ar": "وين بدّك تروح اليوم؟",
+    "en": "Where would you like to go today?"
+  },
+  "kidsShellLockSemantics": {
+    "ar": "ركن الأهل",
+    "en": "Parents' corner"
+  },
+  "kidsShellStars": {
+    "ar": "{count, plural, =0{لا نجوم} =1{نجمة واحدة} =2{نجمتان} few{{count} نجمات} many{{count} نجمة} other{{count} نجمة}}",
+    "en": "{count, plural, =0{No stars yet} =1{1 star} other{{count} stars}}",
+    "description": "Star count chip on the kids home",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellTimeLeft": {
+    "ar": "{count, plural, =0{خلص الوقت} =1{باقي دقيقة} =2{باقي دقيقتان} few{باقي {count} دقائق} many{باقي {count} دقيقة} other{باقي {count} دقيقة}}",
+    "en": "{count, plural, =0{Time is up} =1{1 minute left} other{{count} minutes left}}",
+    "description": "Time-left chip on the kids home",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellWarning": {
+    "ar": "{count, plural, =0{هلأ بنخلّص} =1{باقي دقيقة} =2{باقي دقيقتان} few{باقي {count} دقائق} many{باقي {count} دقيقة} other{باقي {count} دقيقة}}",
+    "en": "{count, plural, =0{Almost done} =1{1 minute left} other{{count} minutes left}}",
+    "description": "Gentle warning pill shortly before the daily time ends",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellEmptyTitle": {
+    "ar": "لسا ما في عوالم هون",
+    "en": "No worlds here yet"
+  },
+  "kidsShellEmptyBody": {
+    "ar": "قريباً بنضيف ألعاب وقصص جديدة.",
+    "en": "New games and stories are coming soon."
+  },
+  "kidsShellSectionMissing": {
+    "ar": "هالعالم مش موجود",
+    "en": "This world is not here"
+  },
+  "kidsShellHomeSemantics": {
+    "ar": "رجوع للرئيسية",
+    "en": "Back to home"
+  },
+  "kidsShellGateTitle": {
+    "ar": "ركن الأهل",
+    "en": "Parents' corner"
+  },
+  "kidsShellGateBody": {
+    "ar": "اكتب الرقم السري أو المس البصمة عشان تطلع من مدار الصغار",
+    "en": "Enter the PIN or touch the fingerprint sensor to leave Madar Kids"
+  },
+  "kidsShellGateBack": {
+    "ar": "رجوع للّعب",
+    "en": "Back to play"
+  },
+  "kidsShellGateTryAgain": {
+    "ar": "جرّب مرّة ثانية",
+    "en": "Try once more"
+  },
+  "kidsShellGatePause": {
+    "ar": "{count, plural, =0{جرّب هلأ} =1{جرّب بعد ثانية} =2{جرّب بعد ثانيتين} few{خلّينا ناخد استراحة صغيرة. جرّب بعد {count} ثواني.} many{خلّينا ناخد استراحة صغيرة. جرّب بعد {count} ثانية.} other{خلّينا ناخد استراحة صغيرة. جرّب بعد {count} ثانية.}}",
+    "en": "{count, plural, =0{Try now} =1{Try again in 1 second} other{Let us take a short break. Try again in {count} seconds.}}",
+    "description": "Calm pause after three wrong PINs; never blames the child",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellGateFingerprint": {
+    "ar": "البصمة",
+    "en": "Fingerprint"
+  },
+  "kidsShellGateDelete": {
+    "ar": "مسح",
+    "en": "Delete"
+  },
+  "kidsShellGateUnavailable": {
+    "ar": "ما قدرنا نتأكّد هلأ. جرّب مرّة ثانية.",
+    "en": "We could not check just now. Please try again."
+  },
+  "kidsShellGateBioReason": {
+    "ar": "لمسة من الأهل عشان نطلع من مدار الصغار",
+    "en": "A parent's touch to leave Madar Kids"
+  },
+  "kidsShellGateBioTitle": {
+    "ar": "ركن الأهل",
+    "en": "Parents' corner"
+  },
+  "kidsShellGateBioHint": {
+    "ar": "المس مستشعر البصمة",
+    "en": "Touch the fingerprint sensor"
+  },
+  "kidsShellGateBioCancel": {
+    "ar": "استخدم الرقم السري",
+    "en": "Use the PIN"
+  },
+  "kidsShellCornerTitle": {
+    "ar": "ركن الأهل",
+    "en": "Parents' corner"
+  },
+  "kidsShellCornerLeave": {
+    "ar": "اطلع من مدار الصغار",
+    "en": "Leave Madar Kids"
+  },
+  "kidsShellCornerLeaveHint": {
+    "ar": "بترجع لمدار العادي.",
+    "en": "You go back to the regular Madar."
+  },
+  "kidsShellCornerTimeTitle": {
+    "ar": "وقت اللعب باليوم",
+    "en": "Daily play time"
+  },
+  "kidsShellCornerTimeValue": {
+    "ar": "{count, plural, =0{بدون حدّ} =1{دقيقة واحدة} =2{دقيقتان} few{{count} دقائق} many{{count} دقيقة} other{{count} دقيقة}}",
+    "en": "{count, plural, =0{No limit} =1{1 minute} other{{count} minutes}}",
+    "description": "The daily limit; zero means off",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellCornerTimeHint": {
+    "ar": "بيبدأ من جديد كل يوم عند نص الليل. الصفر يعني بدون حدّ.",
+    "en": "It starts over every day at midnight. Zero means no limit."
+  },
+  "kidsShellCornerTimeUsed": {
+    "ar": "{count, plural, =0{لسا ما لعب اليوم} =1{لعب اليوم دقيقة واحدة} =2{لعب اليوم دقيقتين} few{لعب اليوم {count} دقائق} many{لعب اليوم {count} دقيقة} other{لعب اليوم {count} دقيقة}}",
+    "en": "{count, plural, =0{Has not played yet today} =1{Played 1 minute today} other{Played {count} minutes today}}",
+    "description": "Minutes of kids time used today",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellCornerMore": {
+    "ar": "زيادة",
+    "en": "More"
+  },
+  "kidsShellCornerLess": {
+    "ar": "نقصان",
+    "en": "Less"
+  },
+  "kidsShellCornerPinTitle": {
+    "ar": "تثبيت الشاشة",
+    "en": "Screen pinning"
+  },
+  "kidsShellCornerPinOn": {
+    "ar": "الشاشة مثبّتة هلأ.",
+    "en": "The screen is pinned now."
+  },
+  "kidsShellCornerPinOff": {
+    "ar": "الشاشة مش مثبّتة.",
+    "en": "The screen is not pinned."
+  },
+  "kidsShellCornerPinAction": {
+    "ar": "ثبّت الشاشة",
+    "en": "Pin the screen"
+  },
+  "kidsShellCornerPinUnsupported": {
+    "ar": "هالجوال ما بيدعم تثبيت الشاشة من هون.",
+    "en": "This phone cannot pin the screen from here."
+  },
+  "kidsShellCornerReligiousTitle": {
+    "ar": "المحتوى الديني",
+    "en": "Religious content"
+  },
+  "kidsShellCornerReligiousHidden": {
+    "ar": "مخفي لحد ما يتسمّى الشيخ المراجع.",
+    "en": "Hidden until the reviewing sheikh is named."
+  },
+  "kidsShellCornerBack": {
+    "ar": "رجوع للّعب",
+    "en": "Back to play"
+  },
+  "kidsShellEndTitle": {
+    "ar": "خلص وقت اللعب اليوم",
+    "en": "Play time is over for today"
+  },
+  "kidsShellEndBody": {
+    "ar": "أخذت استراحة حلوة. منكمّل بكرا!",
+    "en": "You had a lovely break. See you tomorrow!"
+  },
+  "kidsShellEndStars": {
+    "ar": "{count, plural, =0{نجومك محفوظة} =1{نجمة محفوظة} =2{نجمتان محفوظتان} few{{count} نجمات محفوظة} many{{count} نجمة محفوظة} other{{count} نجمة محفوظة}}",
+    "en": "{count, plural, =0{Your stars are saved} =1{1 star saved} other{{count} stars saved}}",
+    "description": "Stars kept, shown on the end screen",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellEndOk": {
+    "ar": "تمام",
+    "en": "Okay"
+  },
+  "kidsShellEndParent": {
+    "ar": "للأهل: زيادة الوقت",
+    "en": "For parents: more time"
+  },
+  "kidsShellSpeak": {
+    "ar": "اسمعها",
+    "en": "Listen"
+  }
+}

@@ -13,6 +13,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.WindowManager
+import app.madar.orbit.kids.KidsPinning
 import app.madar.orbit.ondevice.OnDeviceChannel
 import app.madar.orbit.savedgames.SavedGamesChannel
 import app.madar.orbit.together.TogetherChannels
@@ -297,6 +298,8 @@ class MainActivity : AudioServiceFragmentActivity() {
         // Part 15: what this phone can run (answers "unsupported" for both engines until step B).
         OnDeviceChannel.register(flutterEngine, app)
         TogetherChannels.register(flutterEngine)
+        // «مدار الصغار»: app pinning (screen pinning) offered when kids mode is entered.
+        KidsPinning.register(flutterEngine) { channelHost?.get() }
         ShareIntakeChannel.register(flutterEngine, deliverPending = warmEngine)
         // The plugins are attached to this activity by now (the engine attaches
         // them before it calls configureFlutterEngine): deliver the launch the

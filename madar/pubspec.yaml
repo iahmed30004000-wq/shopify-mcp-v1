@@ -40,6 +40,7 @@ dependencies:
   hijri: ^3.0.1
   just_audio: ^0.10.6
   audio_service: ^0.18.19
+  record: ^7.1.2 # BSD-3 mic capture for the parent's voice stories (lib/features/kids/stories); on-device only
   audio_session: ^0.2.4 # audio focus / becoming-noisy for recitation (already resolved via just_audio)
   fl_chart: ^1.2.0
   pdf: ^3.12.0

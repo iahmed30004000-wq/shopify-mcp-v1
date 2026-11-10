@@ -26066,6 +26066,675 @@
   "@dayChatTitleIncomeUnknownBare": {
     "description": "Daily chat: money in with no amount and nothing said about where from"
   },
+  "kidsFaithJuzAmmaTitle": "Juz' Amma",
+  "@kidsFaithJuzAmmaTitle": {
+    "description": "Kids: title of the short-surahs reader (name taken from design screen 03)"
+  },
+  "kidsFaithPrayerWuduTitle": "Prayer and wudu",
+  "@kidsFaithPrayerWuduTitle": {
+    "description": "Kids: title of the steps section (design screen 05)"
+  },
+  "kidsFaithStoriesTitle": "Stories",
+  "@kidsFaithStoriesTitle": {
+    "description": "Kids: title of the stories section (design screen 06)"
+  },
+  "kidsFaithMannersTitle": "Manners",
+  "@kidsFaithMannersTitle": {
+    "description": "Kids: title of the manners section (needs the owner's wording check)"
+  },
+  "kidsFaithAdhkarTitle": "Adhkar",
+  "@kidsFaithAdhkarTitle": {
+    "description": "Kids: title of the adhkar section (design screen 13)"
+  },
+  "kidsFaithSoonTitle": "Coming soon",
+  "@kidsFaithSoonTitle": {
+    "description": "Kids: calm empty state while nothing is approved yet"
+  },
+  "kidsFaithSoonBody": "We are still getting this ready for you. Come back later!",
+  "@kidsFaithSoonBody": {
+    "description": "Kids: body of the calm empty state"
+  },
+  "kidsFaithHome": "Home",
+  "@kidsFaithHome": {
+    "description": "Kids: tooltip of the home button"
+  },
+  "kidsFaithListen": "Listen",
+  "@kidsFaithListen": {
+    "description": "Kids: play button label"
+  },
+  "kidsFaithPause": "Pause",
+  "@kidsFaithPause": {
+    "description": "Kids: pause button label"
+  },
+  "kidsFaithAgain": "Again",
+  "@kidsFaithAgain": {
+    "description": "Kids: try again button"
+  },
+  "kidsFaithNext": "Next",
+  "@kidsFaithNext": {
+    "description": "Kids: next button"
+  },
+  "kidsFaithPrevious": "Previous",
+  "@kidsFaithPrevious": {
+    "description": "Kids: previous button"
+  },
+  "kidsFaithTryYourself": "Your turn",
+  "@kidsFaithTryYourself": {
+    "description": "Kids: opens the recitation check"
+  },
+  "kidsFaithRepeatAyah": "Repeat the ayah",
+  "@kidsFaithRepeatAyah": {
+    "description": "Kids: replays the current ayah"
+  },
+  "kidsFaithAyahOfTotal": "Ayah {n} of {total}",
+  "@kidsFaithAyahOfTotal": {
+    "description": "Kids: position inside a surah; both numbers arrive already formatted",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsFaithAudioNotDownloaded": "The sound is not downloaded",
+  "@kidsFaithAudioNotDownloaded": {
+    "description": "Kids: calm note when the recitation is not on the phone"
+  },
+  "kidsFaithAudioNotDownloadedHint": "Ask your parents to download it from the Quran section.",
+  "@kidsFaithAudioNotDownloadedHint": {
+    "description": "Kids: what to do about the missing sound"
+  },
+  "kidsFaithReciter": "Reciter: {name}",
+  "@kidsFaithReciter": {
+    "description": "Kids: the reciter heard",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsFaithListening": "I am listening…",
+  "@kidsFaithListening": {
+    "description": "Kids: shown while the microphone listens"
+  },
+  "kidsFaithTapToSpeak": "Tap and read",
+  "@kidsFaithTapToSpeak": {
+    "description": "Kids: microphone button label"
+  },
+  "kidsFaithSoftRetryTitle": "I did not hear that well, again",
+  "@kidsFaithSoftRetryTitle": {
+    "description": "Kids: shown when the recognition is not confident. Never a mistake message"
+  },
+  "kidsFaithSoftRetryBody": "No worries! Try once more, I am listening.",
+  "@kidsFaithSoftRetryBody": {
+    "description": "Kids: body of the soft retry card"
+  },
+  "kidsFaithStarsSafe": "Your stars are safe",
+  "@kidsFaithStarsSafe": {
+    "description": "Kids: reassurance under the soft retry card"
+  },
+  "kidsFaithWellDoneTitle": "Well done!",
+  "@kidsFaithWellDoneTitle": {
+    "description": "Kids: confident hearing"
+  },
+  "kidsFaithWellDoneBody": "You read it nicely. A new star for you!",
+  "@kidsFaithWellDoneBody": {
+    "description": "Kids: body of the well-done card"
+  },
+  "kidsFaithStarNow": "Your stars: {n}",
+  "@kidsFaithStarNow": {
+    "description": "Kids: star count after a new star (already formatted)",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsFaithNextAyah": "Next ayah",
+  "@kidsFaithNextAyah": {
+    "description": "Kids: after a well-done result"
+  },
+  "kidsFaithTabWudu": "Wudu",
+  "@kidsFaithTabWudu": {
+    "description": "Kids: tab of the steps screen"
+  },
+  "kidsFaithTabPrayer": "Prayer",
+  "@kidsFaithTabPrayer": {
+    "description": "Kids: tab of the steps screen"
+  },
+  "kidsFaithStepBadge": "Step {n}",
+  "@kidsFaithStepBadge": {
+    "description": "Kids: accessibility label of the step badge (number already formatted)",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsFaithPageOfTotal": "{n} of {total}",
+  "@kidsFaithPageOfTotal": {
+    "description": "Kids: page or step position (both already formatted)",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsFaithMorning": "Morning",
+  "@kidsFaithMorning": {
+    "description": "Kids: adhkar tab"
+  },
+  "kidsFaithEvening": "Evening",
+  "@kidsFaithEvening": {
+    "description": "Kids: adhkar tab"
+  },
+  "kidsFaithNextDhikr": "Next one",
+  "@kidsFaithNextDhikr": {
+    "description": "Kids: next adhkar item"
+  },
+  "kidsFaithTapCircle": "Tap the circle each time you say it",
+  "@kidsFaithTapCircle": {
+    "description": "Kids: how the bead counter works"
+  },
+  "kidsFaithBeadsOfTotal": "of {total}",
+  "@kidsFaithBeadsOfTotal": {
+    "description": "Kids: under the bead counter number (total already formatted)",
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsFaithBeadsDone": "All counted!",
+  "@kidsFaithBeadsDone": {
+    "description": "Kids: the bead circle is full"
+  },
+  "kidsFaithStoryPicker": "Pick a story",
+  "@kidsFaithStoryPicker": {
+    "description": "Kids: heading of the story list"
+  },
+  "kidsLettersTitle": "Letters",
+  "@kidsLettersTitle": {
+    "description": "Kids: title of the Arabic letters section (design 07a)"
+  },
+  "kidsMathsTitle": "Maths",
+  "@kidsMathsTitle": {
+    "description": "Kids: title of the maths section (design 07b)"
+  },
+  "kidsColouringTitle": "Colouring",
+  "@kidsColouringTitle": {
+    "description": "Kids: title of the colouring section (design 08a)"
+  },
+  "kidsLettersLetterOf": "The letter {name}",
+  "@kidsLettersLetterOf": {
+    "description": "Kids letters: card title, e.g. the letter Ain",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsLettersTapHear": "Tap to hear the letter",
+  "@kidsLettersTapHear": {
+    "description": "Kids letters: hint under the letter's name"
+  },
+  "kidsLettersFormIsolated": "Alone",
+  "@kidsLettersFormIsolated": {
+    "description": "Kids letters: label of the letter written on its own"
+  },
+  "kidsLettersFormInitial": "Start of a word",
+  "@kidsLettersFormInitial": {
+    "description": "Kids letters: label of the letter at the start of a word"
+  },
+  "kidsLettersFormMedial": "Middle of a word",
+  "@kidsLettersFormMedial": {
+    "description": "Kids letters: label of the letter in the middle of a word"
+  },
+  "kidsLettersFormFinal": "End of a word",
+  "@kidsLettersFormFinal": {
+    "description": "Kids letters: label of the letter at the end of a word"
+  },
+  "kidsLettersTraceCta": "Write the letter with your finger",
+  "@kidsLettersTraceCta": {
+    "description": "Kids letters: button that opens the finger tracing canvas"
+  },
+  "kidsLettersTraceHint": "Slide your finger over the letter",
+  "@kidsLettersTraceHint": {
+    "description": "Kids letters: hint on the tracing canvas"
+  },
+  "kidsLettersTraceGood": "Lovely!",
+  "@kidsLettersTraceGood": {
+    "description": "Kids letters: friendly message once the child has traced for a while"
+  },
+  "kidsLettersTraceClear": "Clear and try again",
+  "@kidsLettersTraceClear": {
+    "description": "Kids letters: clears the finger tracing"
+  },
+  "kidsLettersNext": "Next letter",
+  "@kidsLettersNext": {
+    "description": "Kids letters: goes to the next letter"
+  },
+  "kidsLettersPrevious": "Previous letter",
+  "@kidsLettersPrevious": {
+    "description": "Kids letters: screen-reader label of the previous-letter button"
+  },
+  "kidsLettersBack": "Back to the letters",
+  "@kidsLettersBack": {
+    "description": "Kids letters: goes back from tracing or the quiz to the letter card"
+  },
+  "kidsLettersQuizCta": "Which letter is this?",
+  "@kidsLettersQuizCta": {
+    "description": "Kids letters: the quiz title and the button that opens it"
+  },
+  "kidsLettersQuizRetry": "Try again",
+  "@kidsLettersQuizRetry": {
+    "description": "Kids letters: soft retry in amber. Never says wrong"
+  },
+  "kidsLettersQuizGood": "Well done!",
+  "@kidsLettersQuizGood": {
+    "description": "Kids letters: shown on a right answer"
+  },
+  "kidsLettersQuizNext": "Next",
+  "@kidsLettersQuizNext": {
+    "description": "Kids letters: goes to the next quiz question"
+  },
+  "kidsLettersQuizDone": "Round finished! You earned a star",
+  "@kidsLettersQuizDone": {
+    "description": "Kids letters: end of a quiz round"
+  },
+  "kidsLettersQuizAgain": "New round",
+  "@kidsLettersQuizAgain": {
+    "description": "Kids letters: starts another quiz round"
+  },
+  "kidsLettersQuizProgress": "Question {n} of {total}",
+  "@kidsLettersQuizProgress": {
+    "description": "Kids letters: screen-reader label of quiz progress",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsLearnHear": "Listen",
+  "@kidsLearnHear": {
+    "description": "Kids: screen-reader label of every speaker button"
+  },
+  "kidsMathsTabMul": "Times",
+  "@kidsMathsTabMul": {
+    "description": "Kids maths: multiplication tab"
+  },
+  "kidsMathsTabDiv": "Division",
+  "@kidsMathsTabDiv": {
+    "description": "Kids maths: division tab"
+  },
+  "kidsMathsTabFrac": "Fractions",
+  "@kidsMathsTabFrac": {
+    "description": "Kids maths: fractions tab"
+  },
+  "kidsMathsRowsCaption": "{rows, plural, =1{One row} other{{rows} rows}}, {cols} in each",
+  "@kidsMathsRowsCaption": {
+    "description": "Kids maths: caption under the dot array of a multiplication",
+    "placeholders": {
+      "rows": {
+        "type": "int"
+      },
+      "cols": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsMathsDivCaption": "Share {total} equally between {groups}",
+  "@kidsMathsDivCaption": {
+    "description": "Kids maths: caption under the groups of a division",
+    "placeholders": {
+      "total": {
+        "type": "int"
+      },
+      "groups": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsMathsPieCaption": "Which fraction is the coloured part?",
+  "@kidsMathsPieCaption": {
+    "description": "Kids maths: caption under the pie"
+  },
+  "kidsMathsOfCaption": "{frac} of {total}",
+  "@kidsMathsOfCaption": {
+    "description": "Kids maths: fraction of an amount, e.g. three quarters of twelve",
+    "placeholders": {
+      "frac": {
+        "type": "String"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsMathsOf": "of",
+  "@kidsMathsOf": {
+    "description": "Kids maths: the word between a fraction and the amount it is taken from"
+  },
+  "kidsMathsTryAgain": "Try again",
+  "@kidsMathsTryAgain": {
+    "description": "Kids maths: soft retry in amber. Never says wrong"
+  },
+  "kidsMathsGood": "Well done!",
+  "@kidsMathsGood": {
+    "description": "Kids maths: shown on a right answer"
+  },
+  "kidsMathsNext": "Next",
+  "@kidsMathsNext": {
+    "description": "Kids maths: next question"
+  },
+  "kidsMathsSetDone": "Set finished! You earned a star",
+  "@kidsMathsSetDone": {
+    "description": "Kids maths: end of a set of questions"
+  },
+  "kidsMathsNewSet": "New set",
+  "@kidsMathsNewSet": {
+    "description": "Kids maths: starts another set"
+  },
+  "kidsMathsProgress": "Question {n} of {total}",
+  "@kidsMathsProgress": {
+    "description": "Kids maths: screen-reader label of set progress",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsMathsChoiceLabel": "Answer {value}",
+  "@kidsMathsChoiceLabel": {
+    "description": "Kids maths: screen-reader label of an answer button",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsColAddTitle": "Add a picture from my phone",
+  "@kidsColAddTitle": {
+    "description": "Kids colouring: title of the import card"
+  },
+  "kidsColAddSub": "It stays on your phone and goes nowhere",
+  "@kidsColAddSub": {
+    "description": "Kids colouring: promise under the import card title"
+  },
+  "kidsColPickFile": "Choose a file",
+  "@kidsColPickFile": {
+    "description": "Kids colouring: button that opens the file picker"
+  },
+  "kidsColParentOnly": "For parents",
+  "@kidsColParentOnly": {
+    "description": "Kids colouring: tag on things that open behind the parent gate"
+  },
+  "kidsColMine": "My pictures",
+  "@kidsColMine": {
+    "description": "Kids colouring: heading of the pictures the parent added"
+  },
+  "kidsColMadar": "Madar pictures",
+  "@kidsColMadar": {
+    "description": "Kids colouring: heading of the built-in geometric pages"
+  },
+  "kidsColMineTag": "Mine",
+  "@kidsColMineTag": {
+    "description": "Kids colouring: small tag on a picture the parent added"
+  },
+  "kidsColPatternName": "Pattern {number}",
+  "@kidsColPatternName": {
+    "description": "Kids colouring: name of a built-in page",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsColPictureName": "Picture {number}",
+  "@kidsColPictureName": {
+    "description": "Kids colouring: name of an imported picture",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsColDone": "Finished",
+  "@kidsColDone": {
+    "description": "Kids colouring: saves and goes back to the gallery"
+  },
+  "kidsColUndo": "Undo the last colour",
+  "@kidsColUndo": {
+    "description": "Kids colouring: undo button label"
+  },
+  "kidsColEraser": "Eraser",
+  "@kidsColEraser": {
+    "description": "Kids colouring: eraser button label"
+  },
+  "kidsColClear": "Start again",
+  "@kidsColClear": {
+    "description": "Kids colouring: clears all colours of the page"
+  },
+  "kidsColBack": "Back to the gallery",
+  "@kidsColBack": {
+    "description": "Kids colouring: goes back to the gallery"
+  },
+  "kidsColSwatch": "Colour {n}",
+  "@kidsColSwatch": {
+    "description": "Kids colouring: screen-reader label of a colour button",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsColSaved": "The picture and its colours are saved on your phone only",
+  "@kidsColSaved": {
+    "description": "Kids colouring: privacy line under the page"
+  },
+  "kidsColBadFile": "That file did not work",
+  "@kidsColBadFile": {
+    "description": "Kids colouring: soft title when an import fails"
+  },
+  "kidsColNotImage": "That is not a picture. Please choose another one.",
+  "@kidsColNotImage": {
+    "description": "Kids colouring: the file was not an image"
+  },
+  "kidsColTooBig": "That picture is too big. Please choose a smaller one.",
+  "@kidsColTooBig": {
+    "description": "Kids colouring: the image was too large"
+  },
+  "kidsColCantRead": "We could not open that picture. Try another one.",
+  "@kidsColCantRead": {
+    "description": "Kids colouring: the image could not be read"
+  },
+  "kidsColPrepTitle": "Get the picture ready",
+  "@kidsColPrepTitle": {
+    "description": "Kids colouring: parent step after picking a file"
+  },
+  "kidsColPrepPhotoHint": "This looks like a photo. Turn it into lines so it is easy to colour.",
+  "@kidsColPrepPhotoHint": {
+    "description": "Kids colouring: suggestion for a photograph"
+  },
+  "kidsColPrepLinesHint": "This looks like a line drawing. You can use it as it is.",
+  "@kidsColPrepLinesHint": {
+    "description": "Kids colouring: suggestion for a line drawing"
+  },
+  "kidsColPrepAsIs": "Use it as it is",
+  "@kidsColPrepAsIs": {
+    "description": "Kids colouring: keep the picture's own lines"
+  },
+  "kidsColPrepOutline": "Turn it into lines",
+  "@kidsColPrepOutline": {
+    "description": "Kids colouring: automatic outline of a photograph"
+  },
+  "kidsColLevelLow": "Few lines",
+  "@kidsColLevelLow": {
+    "description": "Kids colouring: outline detail, low"
+  },
+  "kidsColLevelMid": "Some lines",
+  "@kidsColLevelMid": {
+    "description": "Kids colouring: outline detail, medium"
+  },
+  "kidsColLevelHigh": "Many lines",
+  "@kidsColLevelHigh": {
+    "description": "Kids colouring: outline detail, high"
+  },
+  "kidsColSavePicture": "Save the picture",
+  "@kidsColSavePicture": {
+    "description": "Kids colouring: adds the prepared picture to the gallery"
+  },
+  "kidsColCancel": "Cancel",
+  "@kidsColCancel": {
+    "description": "Kids colouring: cancels the import"
+  },
+  "kidsColDelete": "Delete the picture",
+  "@kidsColDelete": {
+    "description": "Kids colouring: parent deletes an imported picture"
+  },
+  "kidsColDeleteAsk": "Delete this picture and its colours?",
+  "@kidsColDeleteAsk": {
+    "description": "Kids colouring: parent confirmation"
+  },
+  "kidsColDeleteYes": "Delete it",
+  "@kidsColDeleteYes": {
+    "description": "Kids colouring: confirms the delete"
+  },
+  "kidsColWorking": "One moment, getting the picture ready…",
+  "@kidsColWorking": {
+    "description": "Kids colouring: shown while a picture is processed"
+  },
+  "kidsShellEntryTitle": "Madar Kids",
+  "@kidsShellEntryTitle": {
+    "description": "Title of the kids-mode card at the top of Settings"
+  },
+  "kidsShellEntrySubtitle": "A safe place to play and learn",
+  "kidsShellEntryButton": "Enter",
+  "@kidsShellEntryButton": {
+    "description": "The one tap that puts the phone into kids mode"
+  },
+  "kidsShellEntryRule": "One tap to go in. Only the PIN or the fingerprint gets you out.",
+  "kidsShellNeedPinTitle": "A PIN first",
+  "kidsShellNeedPinBody": "Before the children go in, a parent sets a PIN. It is what opens the door when they are done.",
+  "kidsShellNeedPinAction": "Set the PIN",
+  "kidsShellPinOfferBadge": "For parents",
+  "kidsShellPinOfferTitle": "Pin the screen?",
+  "kidsShellPinOfferBody": "Pinning keeps the phone on Madar Kids only, and only a parent can leave.",
+  "kidsShellPinOfferYes": "Pin the screen",
+  "kidsShellPinOfferNo": "Not now, continue without pinning",
+  "kidsShellPinOfferLater": "You can change this later in the parents' corner.",
+  "kidsShellGreeting": "Hello, star!",
+  "kidsShellGreetingSub": "Where would you like to go today?",
+  "kidsShellLockSemantics": "Parents' corner",
+  "kidsShellStars": "{count, plural, =0{No stars yet} =1{1 star} other{{count} stars}}",
+  "@kidsShellStars": {
+    "description": "Star count chip on the kids home",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellTimeLeft": "{count, plural, =0{Time is up} =1{1 minute left} other{{count} minutes left}}",
+  "@kidsShellTimeLeft": {
+    "description": "Time-left chip on the kids home",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellWarning": "{count, plural, =0{Almost done} =1{1 minute left} other{{count} minutes left}}",
+  "@kidsShellWarning": {
+    "description": "Gentle warning pill shortly before the daily time ends",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellEmptyTitle": "No worlds here yet",
+  "kidsShellEmptyBody": "New games and stories are coming soon.",
+  "kidsShellSectionMissing": "This world is not here",
+  "kidsShellHomeSemantics": "Back to home",
+  "kidsShellGateTitle": "Parents' corner",
+  "kidsShellGateBody": "Enter the PIN or touch the fingerprint sensor to leave Madar Kids",
+  "kidsShellGateBack": "Back to play",
+  "kidsShellGateTryAgain": "Try once more",
+  "kidsShellGatePause": "{count, plural, =0{Try now} =1{Try again in 1 second} other{Let us take a short break. Try again in {count} seconds.}}",
+  "@kidsShellGatePause": {
+    "description": "Calm pause after three wrong PINs; never blames the child",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellGateFingerprint": "Fingerprint",
+  "kidsShellGateDelete": "Delete",
+  "kidsShellGateUnavailable": "We could not check just now. Please try again.",
+  "kidsShellGateBioReason": "A parent's touch to leave Madar Kids",
+  "kidsShellGateBioTitle": "Parents' corner",
+  "kidsShellGateBioHint": "Touch the fingerprint sensor",
+  "kidsShellGateBioCancel": "Use the PIN",
+  "kidsShellCornerTitle": "Parents' corner",
+  "kidsShellCornerLeave": "Leave Madar Kids",
+  "kidsShellCornerLeaveHint": "You go back to the regular Madar.",
+  "kidsShellCornerTimeTitle": "Daily play time",
+  "kidsShellCornerTimeValue": "{count, plural, =0{No limit} =1{1 minute} other{{count} minutes}}",
+  "@kidsShellCornerTimeValue": {
+    "description": "The daily limit; zero means off",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellCornerTimeHint": "It starts over every day at midnight. Zero means no limit.",
+  "kidsShellCornerTimeUsed": "{count, plural, =0{Has not played yet today} =1{Played 1 minute today} other{Played {count} minutes today}}",
+  "@kidsShellCornerTimeUsed": {
+    "description": "Minutes of kids time used today",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellCornerMore": "More",
+  "kidsShellCornerLess": "Less",
+  "kidsShellCornerPinTitle": "Screen pinning",
+  "kidsShellCornerPinOn": "The screen is pinned now.",
+  "kidsShellCornerPinOff": "The screen is not pinned.",
+  "kidsShellCornerPinAction": "Pin the screen",
+  "kidsShellCornerPinUnsupported": "This phone cannot pin the screen from here.",
+  "kidsShellCornerReligiousTitle": "Religious content",
+  "kidsShellCornerReligiousHidden": "Hidden until the reviewing sheikh is named.",
+  "kidsShellCornerBack": "Back to play",
+  "kidsShellEndTitle": "Play time is over for today",
+  "kidsShellEndBody": "You had a lovely break. See you tomorrow!",
+  "kidsShellEndStars": "{count, plural, =0{Your stars are saved} =1{1 star saved} other{{count} stars saved}}",
+  "@kidsShellEndStars": {
+    "description": "Stars kept, shown on the end screen",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellEndOk": "Okay",
+  "kidsShellEndParent": "For parents: more time",
+  "kidsShellSpeak": "Listen",
   "tasmeeTitle": "Recitation check",
   "@tasmeeTitle": {
     "description": "Part 13: reciting out loud and being checked against the verified text"

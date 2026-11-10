@@ -28591,6 +28591,652 @@ class L10nAr extends L10n {
   String get dayChatTitleIncomeUnknownBare => 'قبضت، بس ما قلت قديش';
 
   @override
+  String get kidsFaithJuzAmmaTitle => 'جزء عمّ';
+
+  @override
+  String get kidsFaithPrayerWuduTitle => 'الصلاة والوضوء';
+
+  @override
+  String get kidsFaithStoriesTitle => 'القصص';
+
+  @override
+  String get kidsFaithMannersTitle => 'الأخلاق';
+
+  @override
+  String get kidsFaithAdhkarTitle => 'الأذكار';
+
+  @override
+  String get kidsFaithSoonTitle => 'قريبًا';
+
+  @override
+  String get kidsFaithSoonBody => 'لسا بنجهّزها إلك بكل عناية. ارجع بعدين!';
+
+  @override
+  String get kidsFaithHome => 'البيت';
+
+  @override
+  String get kidsFaithListen => 'اسمع';
+
+  @override
+  String get kidsFaithPause => 'وقّف';
+
+  @override
+  String get kidsFaithAgain => 'عيد';
+
+  @override
+  String get kidsFaithNext => 'التالي';
+
+  @override
+  String get kidsFaithPrevious => 'السابق';
+
+  @override
+  String get kidsFaithTryYourself => 'جرّب أنت';
+
+  @override
+  String get kidsFaithRepeatAyah => 'عيد الآية';
+
+  @override
+  String kidsFaithAyahOfTotal(String n, String total) {
+    return 'الآية $n من $total';
+  }
+
+  @override
+  String get kidsFaithAudioNotDownloaded => 'الصوت مش محمّل';
+
+  @override
+  String get kidsFaithAudioNotDownloadedHint =>
+      'اطلب من أهلك يحمّلوه من قسم القرآن.';
+
+  @override
+  String kidsFaithReciter(String name) {
+    return 'القارئ: $name';
+  }
+
+  @override
+  String get kidsFaithListening => 'بسمعك…';
+
+  @override
+  String get kidsFaithTapToSpeak => 'المس واقرأ';
+
+  @override
+  String get kidsFaithSoftRetryTitle => 'ما سمعت منيح، عيد';
+
+  @override
+  String get kidsFaithSoftRetryBody => 'ولا يهمك! جرّب كمان مرّة، أنا بسمعك.';
+
+  @override
+  String get kidsFaithStarsSafe => 'نجومك محفوظة زي ما هي';
+
+  @override
+  String get kidsFaithWellDoneTitle => 'أحسنت!';
+
+  @override
+  String get kidsFaithWellDoneBody => 'قرأتها حلو. نجمة جديدة إلك!';
+
+  @override
+  String kidsFaithStarNow(String n) {
+    return 'نجمتك صارت $n';
+  }
+
+  @override
+  String get kidsFaithNextAyah => 'الآية الجاية';
+
+  @override
+  String get kidsFaithTabWudu => 'الوضوء';
+
+  @override
+  String get kidsFaithTabPrayer => 'الصلاة';
+
+  @override
+  String kidsFaithStepBadge(String n) {
+    return 'الخطوة $n';
+  }
+
+  @override
+  String kidsFaithPageOfTotal(String n, String total) {
+    return '$n من $total';
+  }
+
+  @override
+  String get kidsFaithMorning => 'الصباح';
+
+  @override
+  String get kidsFaithEvening => 'المساء';
+
+  @override
+  String get kidsFaithNextDhikr => 'الذكر الجاي';
+
+  @override
+  String get kidsFaithTapCircle => 'المس الدايرة كل ما تقول الذكر';
+
+  @override
+  String kidsFaithBeadsOfTotal(String total) {
+    return 'من $total';
+  }
+
+  @override
+  String get kidsFaithBeadsDone => 'خلّص العدّ!';
+
+  @override
+  String get kidsFaithStoryPicker => 'اختر قصة';
+
+  @override
+  String get kidsLettersTitle => 'الحروف';
+
+  @override
+  String get kidsMathsTitle => 'الحساب';
+
+  @override
+  String get kidsColouringTitle => 'التلوين';
+
+  @override
+  String kidsLettersLetterOf(String name) {
+    return 'حرف $name';
+  }
+
+  @override
+  String get kidsLettersTapHear => 'المس وسمّع الحرف';
+
+  @override
+  String get kidsLettersFormIsolated => 'وحدها';
+
+  @override
+  String get kidsLettersFormInitial => 'أول الكلمة';
+
+  @override
+  String get kidsLettersFormMedial => 'وسط الكلمة';
+
+  @override
+  String get kidsLettersFormFinal => 'آخر الكلمة';
+
+  @override
+  String get kidsLettersTraceCta => 'اكتب الحرف بإصبعك';
+
+  @override
+  String get kidsLettersTraceHint => 'مرّر إصبعك فوق الحرف';
+
+  @override
+  String get kidsLettersTraceGood => 'حلو كتير!';
+
+  @override
+  String get kidsLettersTraceClear => 'امسح وجرّب من جديد';
+
+  @override
+  String get kidsLettersNext => 'الحرف الجاي';
+
+  @override
+  String get kidsLettersPrevious => 'الحرف اللي قبله';
+
+  @override
+  String get kidsLettersBack => 'رجوع للحروف';
+
+  @override
+  String get kidsLettersQuizCta => 'أي حرف هاد؟';
+
+  @override
+  String get kidsLettersQuizRetry => 'جرّب مرة ثانية';
+
+  @override
+  String get kidsLettersQuizGood => 'أحسنت!';
+
+  @override
+  String get kidsLettersQuizNext => 'الجاي';
+
+  @override
+  String get kidsLettersQuizDone => 'خلصت الجولة! أخدت نجمة';
+
+  @override
+  String get kidsLettersQuizAgain => 'جولة جديدة';
+
+  @override
+  String kidsLettersQuizProgress(int n, int total) {
+    return 'السؤال $n من $total';
+  }
+
+  @override
+  String get kidsLearnHear => 'اسمع';
+
+  @override
+  String get kidsMathsTabMul => 'الضرب';
+
+  @override
+  String get kidsMathsTabDiv => 'القسمة';
+
+  @override
+  String get kidsMathsTabFrac => 'الكسور';
+
+  @override
+  String kidsMathsRowsCaption(int rows, int cols) {
+    String _temp0 = intl.Intl.pluralLogic(
+      rows,
+      locale: localeName,
+      other: '$rows صف',
+      many: '$rows صفًّا',
+      few: '$rows صفوف',
+      two: 'صفّين',
+      one: 'صف واحد',
+    );
+    return '$_temp0، في كل صف $cols';
+  }
+
+  @override
+  String kidsMathsDivCaption(int total, int groups) {
+    return 'وزّع $total على $groups بالتساوي';
+  }
+
+  @override
+  String get kidsMathsPieCaption => 'أي كسر هو الجزء الملوّن؟';
+
+  @override
+  String kidsMathsOfCaption(String frac, int total) {
+    return '$frac من $total';
+  }
+
+  @override
+  String get kidsMathsOf => 'من';
+
+  @override
+  String get kidsMathsTryAgain => 'جرّب مرّة ثانية';
+
+  @override
+  String get kidsMathsGood => 'أحسنت!';
+
+  @override
+  String get kidsMathsNext => 'الجاي';
+
+  @override
+  String get kidsMathsSetDone => 'خلصت المجموعة! أخدت نجمة';
+
+  @override
+  String get kidsMathsNewSet => 'مجموعة جديدة';
+
+  @override
+  String kidsMathsProgress(int n, int total) {
+    return 'السؤال $n من $total';
+  }
+
+  @override
+  String kidsMathsChoiceLabel(String value) {
+    return 'الجواب $value';
+  }
+
+  @override
+  String get kidsColAddTitle => 'أضيف صورة من جوالي';
+
+  @override
+  String get kidsColAddSub => 'بتضلّ على جوالك، وما بتروح لأي مكان';
+
+  @override
+  String get kidsColPickFile => 'اختر ملف';
+
+  @override
+  String get kidsColParentOnly => 'للأهل';
+
+  @override
+  String get kidsColMine => 'صوري';
+
+  @override
+  String get kidsColMadar => 'صور المدار';
+
+  @override
+  String get kidsColMineTag => 'صورتي';
+
+  @override
+  String kidsColPatternName(String number) {
+    return 'نقش $number';
+  }
+
+  @override
+  String kidsColPictureName(String number) {
+    return 'صورة $number';
+  }
+
+  @override
+  String get kidsColDone => 'خلصت';
+
+  @override
+  String get kidsColUndo => 'رجّع آخر لون';
+
+  @override
+  String get kidsColEraser => 'ممحاة';
+
+  @override
+  String get kidsColClear => 'ابدأ من جديد';
+
+  @override
+  String get kidsColBack => 'رجوع للمعرض';
+
+  @override
+  String kidsColSwatch(int n) {
+    return 'لون $n';
+  }
+
+  @override
+  String get kidsColSaved => 'الصورة وألوانها محفوظة على جوالك فقط';
+
+  @override
+  String get kidsColBadFile => 'هالملف ما زبط';
+
+  @override
+  String get kidsColNotImage => 'هذا مش ملف صورة. اختر صورة تانية.';
+
+  @override
+  String get kidsColTooBig => 'هالصورة كبيرة كتير. اختر صورة أصغر.';
+
+  @override
+  String get kidsColCantRead => 'ما قدرنا نفتح الصورة. جرّب صورة تانية.';
+
+  @override
+  String get kidsColPrepTitle => 'جهّز الصورة للتلوين';
+
+  @override
+  String get kidsColPrepPhotoHint =>
+      'هاي شكلها صورة عادية. حوّلها لخطوط عشان تصير سهلة للتلوين.';
+
+  @override
+  String get kidsColPrepLinesHint =>
+      'هاي شكلها رسمة بخطوط. فيك تستخدمها كما هي.';
+
+  @override
+  String get kidsColPrepAsIs => 'استخدمها كما هي';
+
+  @override
+  String get kidsColPrepOutline => 'حوّلها لخطوط';
+
+  @override
+  String get kidsColLevelLow => 'خطوط قليلة';
+
+  @override
+  String get kidsColLevelMid => 'خطوط وسط';
+
+  @override
+  String get kidsColLevelHigh => 'خطوط كتير';
+
+  @override
+  String get kidsColSavePicture => 'احفظ الصورة';
+
+  @override
+  String get kidsColCancel => 'إلغاء';
+
+  @override
+  String get kidsColDelete => 'احذف الصورة';
+
+  @override
+  String get kidsColDeleteAsk => 'بدك تحذف هالصورة وألوانها؟';
+
+  @override
+  String get kidsColDeleteYes => 'احذفها';
+
+  @override
+  String get kidsColWorking => 'لحظة، عم نجهّز الصورة…';
+
+  @override
+  String get kidsShellEntryTitle => 'مدار الصغار';
+
+  @override
+  String get kidsShellEntrySubtitle => 'مكان آمن للّعب والتعلّم';
+
+  @override
+  String get kidsShellEntryButton => 'ادخل';
+
+  @override
+  String get kidsShellEntryRule =>
+      'الدخول بلمسة وحدة. الخروج بالرقم السري أو البصمة فقط.';
+
+  @override
+  String get kidsShellNeedPinTitle => 'لازم رقم سري أول';
+
+  @override
+  String get kidsShellNeedPinBody =>
+      'قبل ما يدخل الصغار، لازم الأهل يحطّوا رقم سري. هو اللي بيفتح الباب لما يخلصوا.';
+
+  @override
+  String get kidsShellNeedPinAction => 'حطّ الرقم السري';
+
+  @override
+  String get kidsShellPinOfferBadge => 'للأهل';
+
+  @override
+  String get kidsShellPinOfferTitle => 'نثبّت الشاشة؟';
+
+  @override
+  String get kidsShellPinOfferBody =>
+      'تثبيت الشاشة بيخلّي الجوال على مدار الصغار فقط، وما بيطلع منه إلا الأهل.';
+
+  @override
+  String get kidsShellPinOfferYes => 'ثبّت الشاشة';
+
+  @override
+  String get kidsShellPinOfferNo => 'مش هلأ، كمّل بدون تثبيت';
+
+  @override
+  String get kidsShellPinOfferLater => 'بتقدر تغيّرها بعدين من إعدادات الأهل.';
+
+  @override
+  String get kidsShellGreeting => 'أهلاً يا نجم!';
+
+  @override
+  String get kidsShellGreetingSub => 'وين بدّك تروح اليوم؟';
+
+  @override
+  String get kidsShellLockSemantics => 'ركن الأهل';
+
+  @override
+  String kidsShellStars(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نجمة',
+      many: '$count نجمة',
+      few: '$count نجمات',
+      two: 'نجمتان',
+      one: 'نجمة واحدة',
+      zero: 'لا نجوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String kidsShellTimeLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'باقي $count دقيقة',
+      many: 'باقي $count دقيقة',
+      few: 'باقي $count دقائق',
+      two: 'باقي دقيقتان',
+      one: 'باقي دقيقة',
+      zero: 'خلص الوقت',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String kidsShellWarning(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'باقي $count دقيقة',
+      many: 'باقي $count دقيقة',
+      few: 'باقي $count دقائق',
+      two: 'باقي دقيقتان',
+      one: 'باقي دقيقة',
+      zero: 'هلأ بنخلّص',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get kidsShellEmptyTitle => 'لسا ما في عوالم هون';
+
+  @override
+  String get kidsShellEmptyBody => 'قريباً بنضيف ألعاب وقصص جديدة.';
+
+  @override
+  String get kidsShellSectionMissing => 'هالعالم مش موجود';
+
+  @override
+  String get kidsShellHomeSemantics => 'رجوع للرئيسية';
+
+  @override
+  String get kidsShellGateTitle => 'ركن الأهل';
+
+  @override
+  String get kidsShellGateBody =>
+      'اكتب الرقم السري أو المس البصمة عشان تطلع من مدار الصغار';
+
+  @override
+  String get kidsShellGateBack => 'رجوع للّعب';
+
+  @override
+  String get kidsShellGateTryAgain => 'جرّب مرّة ثانية';
+
+  @override
+  String kidsShellGatePause(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'خلّينا ناخد استراحة صغيرة. جرّب بعد $count ثانية.',
+      many: 'خلّينا ناخد استراحة صغيرة. جرّب بعد $count ثانية.',
+      few: 'خلّينا ناخد استراحة صغيرة. جرّب بعد $count ثواني.',
+      two: 'جرّب بعد ثانيتين',
+      one: 'جرّب بعد ثانية',
+      zero: 'جرّب هلأ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get kidsShellGateFingerprint => 'البصمة';
+
+  @override
+  String get kidsShellGateDelete => 'مسح';
+
+  @override
+  String get kidsShellGateUnavailable =>
+      'ما قدرنا نتأكّد هلأ. جرّب مرّة ثانية.';
+
+  @override
+  String get kidsShellGateBioReason => 'لمسة من الأهل عشان نطلع من مدار الصغار';
+
+  @override
+  String get kidsShellGateBioTitle => 'ركن الأهل';
+
+  @override
+  String get kidsShellGateBioHint => 'المس مستشعر البصمة';
+
+  @override
+  String get kidsShellGateBioCancel => 'استخدم الرقم السري';
+
+  @override
+  String get kidsShellCornerTitle => 'ركن الأهل';
+
+  @override
+  String get kidsShellCornerLeave => 'اطلع من مدار الصغار';
+
+  @override
+  String get kidsShellCornerLeaveHint => 'بترجع لمدار العادي.';
+
+  @override
+  String get kidsShellCornerTimeTitle => 'وقت اللعب باليوم';
+
+  @override
+  String kidsShellCornerTimeValue(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count دقيقة',
+      many: '$count دقيقة',
+      few: '$count دقائق',
+      two: 'دقيقتان',
+      one: 'دقيقة واحدة',
+      zero: 'بدون حدّ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get kidsShellCornerTimeHint =>
+      'بيبدأ من جديد كل يوم عند نص الليل. الصفر يعني بدون حدّ.';
+
+  @override
+  String kidsShellCornerTimeUsed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'لعب اليوم $count دقيقة',
+      many: 'لعب اليوم $count دقيقة',
+      few: 'لعب اليوم $count دقائق',
+      two: 'لعب اليوم دقيقتين',
+      one: 'لعب اليوم دقيقة واحدة',
+      zero: 'لسا ما لعب اليوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get kidsShellCornerMore => 'زيادة';
+
+  @override
+  String get kidsShellCornerLess => 'نقصان';
+
+  @override
+  String get kidsShellCornerPinTitle => 'تثبيت الشاشة';
+
+  @override
+  String get kidsShellCornerPinOn => 'الشاشة مثبّتة هلأ.';
+
+  @override
+  String get kidsShellCornerPinOff => 'الشاشة مش مثبّتة.';
+
+  @override
+  String get kidsShellCornerPinAction => 'ثبّت الشاشة';
+
+  @override
+  String get kidsShellCornerPinUnsupported =>
+      'هالجوال ما بيدعم تثبيت الشاشة من هون.';
+
+  @override
+  String get kidsShellCornerReligiousTitle => 'المحتوى الديني';
+
+  @override
+  String get kidsShellCornerReligiousHidden =>
+      'مخفي لحد ما يتسمّى الشيخ المراجع.';
+
+  @override
+  String get kidsShellCornerBack => 'رجوع للّعب';
+
+  @override
+  String get kidsShellEndTitle => 'خلص وقت اللعب اليوم';
+
+  @override
+  String get kidsShellEndBody => 'أخذت استراحة حلوة. منكمّل بكرا!';
+
+  @override
+  String kidsShellEndStars(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نجمة محفوظة',
+      many: '$count نجمة محفوظة',
+      few: '$count نجمات محفوظة',
+      two: 'نجمتان محفوظتان',
+      one: 'نجمة محفوظة',
+      zero: 'نجومك محفوظة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get kidsShellEndOk => 'تمام';
+
+  @override
+  String get kidsShellEndParent => 'للأهل: زيادة الوقت';
+
+  @override
+  String get kidsShellSpeak => 'اسمعها';
+
+  @override
   String get tasmeeTitle => 'التسميع';
 
   @override

@@ -1,0 +1,71 @@
+{
+  "kidsFaithJuzAmmaTitle": {"ar": "جزء عمّ", "en": "Juz' Amma", "description": "Kids: title of the short-surahs reader (name taken from design screen 03)"},
+  "kidsFaithPrayerWuduTitle": {"ar": "الصلاة والوضوء", "en": "Prayer and wudu", "description": "Kids: title of the steps section (design screen 05)"},
+  "kidsFaithStoriesTitle": {"ar": "القصص", "en": "Stories", "description": "Kids: title of the stories section (design screen 06)"},
+  "kidsFaithMannersTitle": {"ar": "الأخلاق", "en": "Manners", "description": "Kids: title of the manners section (needs the owner's wording check)"},
+  "kidsFaithAdhkarTitle": {"ar": "الأذكار", "en": "Adhkar", "description": "Kids: title of the adhkar section (design screen 13)"},
+  "kidsFaithSoonTitle": {"ar": "قريبًا", "en": "Coming soon", "description": "Kids: calm empty state while nothing is approved yet"},
+  "kidsFaithSoonBody": {"ar": "لسا بنجهّزها إلك بكل عناية. ارجع بعدين!", "en": "We are still getting this ready for you. Come back later!", "description": "Kids: body of the calm empty state"},
+  "kidsFaithHome": {"ar": "البيت", "en": "Home", "description": "Kids: tooltip of the home button"},
+  "kidsFaithListen": {"ar": "اسمع", "en": "Listen", "description": "Kids: play button label"},
+  "kidsFaithPause": {"ar": "وقّف", "en": "Pause", "description": "Kids: pause button label"},
+  "kidsFaithAgain": {"ar": "عيد", "en": "Again", "description": "Kids: try again button"},
+  "kidsFaithNext": {"ar": "التالي", "en": "Next", "description": "Kids: next button"},
+  "kidsFaithPrevious": {"ar": "السابق", "en": "Previous", "description": "Kids: previous button"},
+  "kidsFaithTryYourself": {"ar": "جرّب أنت", "en": "Your turn", "description": "Kids: opens the recitation check"},
+  "kidsFaithRepeatAyah": {"ar": "عيد الآية", "en": "Repeat the ayah", "description": "Kids: replays the current ayah"},
+  "kidsFaithAyahOfTotal": {
+    "ar": "الآية {n} من {total}",
+    "en": "Ayah {n} of {total}",
+    "description": "Kids: position inside a surah; both numbers arrive already formatted",
+    "placeholders": {"n": {"type": "String"}, "total": {"type": "String"}}
+  },
+  "kidsFaithAudioNotDownloaded": {"ar": "الصوت مش محمّل", "en": "The sound is not downloaded", "description": "Kids: calm note when the recitation is not on the phone"},
+  "kidsFaithAudioNotDownloadedHint": {"ar": "اطلب من أهلك يحمّلوه من قسم القرآن.", "en": "Ask your parents to download it from the Quran section.", "description": "Kids: what to do about the missing sound"},
+  "kidsFaithReciter": {
+    "ar": "القارئ: {name}",
+    "en": "Reciter: {name}",
+    "description": "Kids: the reciter heard",
+    "placeholders": {"name": {"type": "String"}}
+  },
+  "kidsFaithListening": {"ar": "بسمعك…", "en": "I am listening…", "description": "Kids: shown while the microphone listens"},
+  "kidsFaithTapToSpeak": {"ar": "المس واقرأ", "en": "Tap and read", "description": "Kids: microphone button label"},
+  "kidsFaithSoftRetryTitle": {"ar": "ما سمعت منيح، عيد", "en": "I did not hear that well, again", "description": "Kids: shown when the recognition is not confident. Never a mistake message"},
+  "kidsFaithSoftRetryBody": {"ar": "ولا يهمك! جرّب كمان مرّة، أنا بسمعك.", "en": "No worries! Try once more, I am listening.", "description": "Kids: body of the soft retry card"},
+  "kidsFaithStarsSafe": {"ar": "نجومك محفوظة زي ما هي", "en": "Your stars are safe", "description": "Kids: reassurance under the soft retry card"},
+  "kidsFaithWellDoneTitle": {"ar": "أحسنت!", "en": "Well done!", "description": "Kids: confident hearing"},
+  "kidsFaithWellDoneBody": {"ar": "قرأتها حلو. نجمة جديدة إلك!", "en": "You read it nicely. A new star for you!", "description": "Kids: body of the well-done card"},
+  "kidsFaithStarNow": {
+    "ar": "نجمتك صارت {n}",
+    "en": "Your stars: {n}",
+    "description": "Kids: star count after a new star (already formatted)",
+    "placeholders": {"n": {"type": "String"}}
+  },
+  "kidsFaithNextAyah": {"ar": "الآية الجاية", "en": "Next ayah", "description": "Kids: after a well-done result"},
+  "kidsFaithTabWudu": {"ar": "الوضوء", "en": "Wudu", "description": "Kids: tab of the steps screen"},
+  "kidsFaithTabPrayer": {"ar": "الصلاة", "en": "Prayer", "description": "Kids: tab of the steps screen"},
+  "kidsFaithStepBadge": {
+    "ar": "الخطوة {n}",
+    "en": "Step {n}",
+    "description": "Kids: accessibility label of the step badge (number already formatted)",
+    "placeholders": {"n": {"type": "String"}}
+  },
+  "kidsFaithPageOfTotal": {
+    "ar": "{n} من {total}",
+    "en": "{n} of {total}",
+    "description": "Kids: page or step position (both already formatted)",
+    "placeholders": {"n": {"type": "String"}, "total": {"type": "String"}}
+  },
+  "kidsFaithMorning": {"ar": "الصباح", "en": "Morning", "description": "Kids: adhkar tab"},
+  "kidsFaithEvening": {"ar": "المساء", "en": "Evening", "description": "Kids: adhkar tab"},
+  "kidsFaithNextDhikr": {"ar": "الذكر الجاي", "en": "Next one", "description": "Kids: next adhkar item"},
+  "kidsFaithTapCircle": {"ar": "المس الدايرة كل ما تقول الذكر", "en": "Tap the circle each time you say it", "description": "Kids: how the bead counter works"},
+  "kidsFaithBeadsOfTotal": {
+    "ar": "من {total}",
+    "en": "of {total}",
+    "description": "Kids: under the bead counter number (total already formatted)",
+    "placeholders": {"total": {"type": "String"}}
+  },
+  "kidsFaithBeadsDone": {"ar": "خلّص العدّ!", "en": "All counted!", "description": "Kids: the bead circle is full"},
+  "kidsFaithStoryPicker": {"ar": "اختر قصة", "en": "Pick a story", "description": "Kids: heading of the story list"}
+}

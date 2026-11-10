@@ -27886,6 +27886,635 @@ class L10nEn extends L10n {
       'Received, but you did not say how much';
 
   @override
+  String get kidsFaithJuzAmmaTitle => 'Juz\' Amma';
+
+  @override
+  String get kidsFaithPrayerWuduTitle => 'Prayer and wudu';
+
+  @override
+  String get kidsFaithStoriesTitle => 'Stories';
+
+  @override
+  String get kidsFaithMannersTitle => 'Manners';
+
+  @override
+  String get kidsFaithAdhkarTitle => 'Adhkar';
+
+  @override
+  String get kidsFaithSoonTitle => 'Coming soon';
+
+  @override
+  String get kidsFaithSoonBody =>
+      'We are still getting this ready for you. Come back later!';
+
+  @override
+  String get kidsFaithHome => 'Home';
+
+  @override
+  String get kidsFaithListen => 'Listen';
+
+  @override
+  String get kidsFaithPause => 'Pause';
+
+  @override
+  String get kidsFaithAgain => 'Again';
+
+  @override
+  String get kidsFaithNext => 'Next';
+
+  @override
+  String get kidsFaithPrevious => 'Previous';
+
+  @override
+  String get kidsFaithTryYourself => 'Your turn';
+
+  @override
+  String get kidsFaithRepeatAyah => 'Repeat the ayah';
+
+  @override
+  String kidsFaithAyahOfTotal(String n, String total) {
+    return 'Ayah $n of $total';
+  }
+
+  @override
+  String get kidsFaithAudioNotDownloaded => 'The sound is not downloaded';
+
+  @override
+  String get kidsFaithAudioNotDownloadedHint =>
+      'Ask your parents to download it from the Quran section.';
+
+  @override
+  String kidsFaithReciter(String name) {
+    return 'Reciter: $name';
+  }
+
+  @override
+  String get kidsFaithListening => 'I am listening…';
+
+  @override
+  String get kidsFaithTapToSpeak => 'Tap and read';
+
+  @override
+  String get kidsFaithSoftRetryTitle => 'I did not hear that well, again';
+
+  @override
+  String get kidsFaithSoftRetryBody =>
+      'No worries! Try once more, I am listening.';
+
+  @override
+  String get kidsFaithStarsSafe => 'Your stars are safe';
+
+  @override
+  String get kidsFaithWellDoneTitle => 'Well done!';
+
+  @override
+  String get kidsFaithWellDoneBody => 'You read it nicely. A new star for you!';
+
+  @override
+  String kidsFaithStarNow(String n) {
+    return 'Your stars: $n';
+  }
+
+  @override
+  String get kidsFaithNextAyah => 'Next ayah';
+
+  @override
+  String get kidsFaithTabWudu => 'Wudu';
+
+  @override
+  String get kidsFaithTabPrayer => 'Prayer';
+
+  @override
+  String kidsFaithStepBadge(String n) {
+    return 'Step $n';
+  }
+
+  @override
+  String kidsFaithPageOfTotal(String n, String total) {
+    return '$n of $total';
+  }
+
+  @override
+  String get kidsFaithMorning => 'Morning';
+
+  @override
+  String get kidsFaithEvening => 'Evening';
+
+  @override
+  String get kidsFaithNextDhikr => 'Next one';
+
+  @override
+  String get kidsFaithTapCircle => 'Tap the circle each time you say it';
+
+  @override
+  String kidsFaithBeadsOfTotal(String total) {
+    return 'of $total';
+  }
+
+  @override
+  String get kidsFaithBeadsDone => 'All counted!';
+
+  @override
+  String get kidsFaithStoryPicker => 'Pick a story';
+
+  @override
+  String get kidsLettersTitle => 'Letters';
+
+  @override
+  String get kidsMathsTitle => 'Maths';
+
+  @override
+  String get kidsColouringTitle => 'Colouring';
+
+  @override
+  String kidsLettersLetterOf(String name) {
+    return 'The letter $name';
+  }
+
+  @override
+  String get kidsLettersTapHear => 'Tap to hear the letter';
+
+  @override
+  String get kidsLettersFormIsolated => 'Alone';
+
+  @override
+  String get kidsLettersFormInitial => 'Start of a word';
+
+  @override
+  String get kidsLettersFormMedial => 'Middle of a word';
+
+  @override
+  String get kidsLettersFormFinal => 'End of a word';
+
+  @override
+  String get kidsLettersTraceCta => 'Write the letter with your finger';
+
+  @override
+  String get kidsLettersTraceHint => 'Slide your finger over the letter';
+
+  @override
+  String get kidsLettersTraceGood => 'Lovely!';
+
+  @override
+  String get kidsLettersTraceClear => 'Clear and try again';
+
+  @override
+  String get kidsLettersNext => 'Next letter';
+
+  @override
+  String get kidsLettersPrevious => 'Previous letter';
+
+  @override
+  String get kidsLettersBack => 'Back to the letters';
+
+  @override
+  String get kidsLettersQuizCta => 'Which letter is this?';
+
+  @override
+  String get kidsLettersQuizRetry => 'Try again';
+
+  @override
+  String get kidsLettersQuizGood => 'Well done!';
+
+  @override
+  String get kidsLettersQuizNext => 'Next';
+
+  @override
+  String get kidsLettersQuizDone => 'Round finished! You earned a star';
+
+  @override
+  String get kidsLettersQuizAgain => 'New round';
+
+  @override
+  String kidsLettersQuizProgress(int n, int total) {
+    return 'Question $n of $total';
+  }
+
+  @override
+  String get kidsLearnHear => 'Listen';
+
+  @override
+  String get kidsMathsTabMul => 'Times';
+
+  @override
+  String get kidsMathsTabDiv => 'Division';
+
+  @override
+  String get kidsMathsTabFrac => 'Fractions';
+
+  @override
+  String kidsMathsRowsCaption(int rows, int cols) {
+    String _temp0 = intl.Intl.pluralLogic(
+      rows,
+      locale: localeName,
+      other: '$rows rows',
+      one: 'One row',
+    );
+    return '$_temp0, $cols in each';
+  }
+
+  @override
+  String kidsMathsDivCaption(int total, int groups) {
+    return 'Share $total equally between $groups';
+  }
+
+  @override
+  String get kidsMathsPieCaption => 'Which fraction is the coloured part?';
+
+  @override
+  String kidsMathsOfCaption(String frac, int total) {
+    return '$frac of $total';
+  }
+
+  @override
+  String get kidsMathsOf => 'of';
+
+  @override
+  String get kidsMathsTryAgain => 'Try again';
+
+  @override
+  String get kidsMathsGood => 'Well done!';
+
+  @override
+  String get kidsMathsNext => 'Next';
+
+  @override
+  String get kidsMathsSetDone => 'Set finished! You earned a star';
+
+  @override
+  String get kidsMathsNewSet => 'New set';
+
+  @override
+  String kidsMathsProgress(int n, int total) {
+    return 'Question $n of $total';
+  }
+
+  @override
+  String kidsMathsChoiceLabel(String value) {
+    return 'Answer $value';
+  }
+
+  @override
+  String get kidsColAddTitle => 'Add a picture from my phone';
+
+  @override
+  String get kidsColAddSub => 'It stays on your phone and goes nowhere';
+
+  @override
+  String get kidsColPickFile => 'Choose a file';
+
+  @override
+  String get kidsColParentOnly => 'For parents';
+
+  @override
+  String get kidsColMine => 'My pictures';
+
+  @override
+  String get kidsColMadar => 'Madar pictures';
+
+  @override
+  String get kidsColMineTag => 'Mine';
+
+  @override
+  String kidsColPatternName(String number) {
+    return 'Pattern $number';
+  }
+
+  @override
+  String kidsColPictureName(String number) {
+    return 'Picture $number';
+  }
+
+  @override
+  String get kidsColDone => 'Finished';
+
+  @override
+  String get kidsColUndo => 'Undo the last colour';
+
+  @override
+  String get kidsColEraser => 'Eraser';
+
+  @override
+  String get kidsColClear => 'Start again';
+
+  @override
+  String get kidsColBack => 'Back to the gallery';
+
+  @override
+  String kidsColSwatch(int n) {
+    return 'Colour $n';
+  }
+
+  @override
+  String get kidsColSaved =>
+      'The picture and its colours are saved on your phone only';
+
+  @override
+  String get kidsColBadFile => 'That file did not work';
+
+  @override
+  String get kidsColNotImage =>
+      'That is not a picture. Please choose another one.';
+
+  @override
+  String get kidsColTooBig =>
+      'That picture is too big. Please choose a smaller one.';
+
+  @override
+  String get kidsColCantRead =>
+      'We could not open that picture. Try another one.';
+
+  @override
+  String get kidsColPrepTitle => 'Get the picture ready';
+
+  @override
+  String get kidsColPrepPhotoHint =>
+      'This looks like a photo. Turn it into lines so it is easy to colour.';
+
+  @override
+  String get kidsColPrepLinesHint =>
+      'This looks like a line drawing. You can use it as it is.';
+
+  @override
+  String get kidsColPrepAsIs => 'Use it as it is';
+
+  @override
+  String get kidsColPrepOutline => 'Turn it into lines';
+
+  @override
+  String get kidsColLevelLow => 'Few lines';
+
+  @override
+  String get kidsColLevelMid => 'Some lines';
+
+  @override
+  String get kidsColLevelHigh => 'Many lines';
+
+  @override
+  String get kidsColSavePicture => 'Save the picture';
+
+  @override
+  String get kidsColCancel => 'Cancel';
+
+  @override
+  String get kidsColDelete => 'Delete the picture';
+
+  @override
+  String get kidsColDeleteAsk => 'Delete this picture and its colours?';
+
+  @override
+  String get kidsColDeleteYes => 'Delete it';
+
+  @override
+  String get kidsColWorking => 'One moment, getting the picture ready…';
+
+  @override
+  String get kidsShellEntryTitle => 'Madar Kids';
+
+  @override
+  String get kidsShellEntrySubtitle => 'A safe place to play and learn';
+
+  @override
+  String get kidsShellEntryButton => 'Enter';
+
+  @override
+  String get kidsShellEntryRule =>
+      'One tap to go in. Only the PIN or the fingerprint gets you out.';
+
+  @override
+  String get kidsShellNeedPinTitle => 'A PIN first';
+
+  @override
+  String get kidsShellNeedPinBody =>
+      'Before the children go in, a parent sets a PIN. It is what opens the door when they are done.';
+
+  @override
+  String get kidsShellNeedPinAction => 'Set the PIN';
+
+  @override
+  String get kidsShellPinOfferBadge => 'For parents';
+
+  @override
+  String get kidsShellPinOfferTitle => 'Pin the screen?';
+
+  @override
+  String get kidsShellPinOfferBody =>
+      'Pinning keeps the phone on Madar Kids only, and only a parent can leave.';
+
+  @override
+  String get kidsShellPinOfferYes => 'Pin the screen';
+
+  @override
+  String get kidsShellPinOfferNo => 'Not now, continue without pinning';
+
+  @override
+  String get kidsShellPinOfferLater =>
+      'You can change this later in the parents\' corner.';
+
+  @override
+  String get kidsShellGreeting => 'Hello, star!';
+
+  @override
+  String get kidsShellGreetingSub => 'Where would you like to go today?';
+
+  @override
+  String get kidsShellLockSemantics => 'Parents\' corner';
+
+  @override
+  String kidsShellStars(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count stars',
+      one: '1 star',
+      zero: 'No stars yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String kidsShellTimeLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count minutes left',
+      one: '1 minute left',
+      zero: 'Time is up',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String kidsShellWarning(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count minutes left',
+      one: '1 minute left',
+      zero: 'Almost done',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get kidsShellEmptyTitle => 'No worlds here yet';
+
+  @override
+  String get kidsShellEmptyBody => 'New games and stories are coming soon.';
+
+  @override
+  String get kidsShellSectionMissing => 'This world is not here';
+
+  @override
+  String get kidsShellHomeSemantics => 'Back to home';
+
+  @override
+  String get kidsShellGateTitle => 'Parents\' corner';
+
+  @override
+  String get kidsShellGateBody =>
+      'Enter the PIN or touch the fingerprint sensor to leave Madar Kids';
+
+  @override
+  String get kidsShellGateBack => 'Back to play';
+
+  @override
+  String get kidsShellGateTryAgain => 'Try once more';
+
+  @override
+  String kidsShellGatePause(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Let us take a short break. Try again in $count seconds.',
+      one: 'Try again in 1 second',
+      zero: 'Try now',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get kidsShellGateFingerprint => 'Fingerprint';
+
+  @override
+  String get kidsShellGateDelete => 'Delete';
+
+  @override
+  String get kidsShellGateUnavailable =>
+      'We could not check just now. Please try again.';
+
+  @override
+  String get kidsShellGateBioReason => 'A parent\'s touch to leave Madar Kids';
+
+  @override
+  String get kidsShellGateBioTitle => 'Parents\' corner';
+
+  @override
+  String get kidsShellGateBioHint => 'Touch the fingerprint sensor';
+
+  @override
+  String get kidsShellGateBioCancel => 'Use the PIN';
+
+  @override
+  String get kidsShellCornerTitle => 'Parents\' corner';
+
+  @override
+  String get kidsShellCornerLeave => 'Leave Madar Kids';
+
+  @override
+  String get kidsShellCornerLeaveHint => 'You go back to the regular Madar.';
+
+  @override
+  String get kidsShellCornerTimeTitle => 'Daily play time';
+
+  @override
+  String kidsShellCornerTimeValue(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count minutes',
+      one: '1 minute',
+      zero: 'No limit',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get kidsShellCornerTimeHint =>
+      'It starts over every day at midnight. Zero means no limit.';
+
+  @override
+  String kidsShellCornerTimeUsed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Played $count minutes today',
+      one: 'Played 1 minute today',
+      zero: 'Has not played yet today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get kidsShellCornerMore => 'More';
+
+  @override
+  String get kidsShellCornerLess => 'Less';
+
+  @override
+  String get kidsShellCornerPinTitle => 'Screen pinning';
+
+  @override
+  String get kidsShellCornerPinOn => 'The screen is pinned now.';
+
+  @override
+  String get kidsShellCornerPinOff => 'The screen is not pinned.';
+
+  @override
+  String get kidsShellCornerPinAction => 'Pin the screen';
+
+  @override
+  String get kidsShellCornerPinUnsupported =>
+      'This phone cannot pin the screen from here.';
+
+  @override
+  String get kidsShellCornerReligiousTitle => 'Religious content';
+
+  @override
+  String get kidsShellCornerReligiousHidden =>
+      'Hidden until the reviewing sheikh is named.';
+
+  @override
+  String get kidsShellCornerBack => 'Back to play';
+
+  @override
+  String get kidsShellEndTitle => 'Play time is over for today';
+
+  @override
+  String get kidsShellEndBody => 'You had a lovely break. See you tomorrow!';
+
+  @override
+  String kidsShellEndStars(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count stars saved',
+      one: '1 star saved',
+      zero: 'Your stars are saved',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get kidsShellEndOk => 'Okay';
+
+  @override
+  String get kidsShellEndParent => 'For parents: more time';
+
+  @override
+  String get kidsShellSpeak => 'Listen';
+
+  @override
   String get tasmeeTitle => 'Recitation check';
 
   @override

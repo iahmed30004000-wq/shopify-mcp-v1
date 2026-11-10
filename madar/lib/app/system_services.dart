@@ -23,6 +23,7 @@ import '../features/family/family.dart' show familyReminderSyncProvider;
 import '../features/health/record/record.dart' show AppointmentReminderTaps, recordReminderSyncProvider;
 import '../features/health/wellbeing/wellbeing.dart' show worryReminderSyncProvider;
 import '../features/iqama/iqama.dart' show iqamaSyncProvider;
+import '../features/kids/shell/application/kids_providers.dart' show kidsModeOnProvider;
 import '../features/money/goals/goals.dart' show DueReminderKind, GoalsReminderTaps, goalsReminderSyncProvider;
 import '../features/notification_center/notification_center.dart'
     show
@@ -264,6 +265,9 @@ class PlanShareRouter {
   void _onShare(SharedPlanPayload payload) {
     if (!_ref.mounted) return;
     if (!_ref.read(appSettingsProvider).onboarded) return;
+    // «مدار الصغار»: a child's phone takes nothing in from outside. The share
+    // is dropped (not even parked) while kids mode is on.
+    if (_ref.read(kidsModeOnProvider)) return;
     // Parked first, navigated second: a second answer shared while the
     // import screen is already open is picked up by its own listener.
     _ref.read(pendingSharedPlanProvider.notifier).offer(payload);

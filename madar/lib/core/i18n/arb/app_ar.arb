@@ -26066,6 +26066,675 @@
   "@dayChatTitleIncomeUnknownBare": {
     "description": "Daily chat: money in with no amount and nothing said about where from"
   },
+  "kidsFaithJuzAmmaTitle": "جزء عمّ",
+  "@kidsFaithJuzAmmaTitle": {
+    "description": "Kids: title of the short-surahs reader (name taken from design screen 03)"
+  },
+  "kidsFaithPrayerWuduTitle": "الصلاة والوضوء",
+  "@kidsFaithPrayerWuduTitle": {
+    "description": "Kids: title of the steps section (design screen 05)"
+  },
+  "kidsFaithStoriesTitle": "القصص",
+  "@kidsFaithStoriesTitle": {
+    "description": "Kids: title of the stories section (design screen 06)"
+  },
+  "kidsFaithMannersTitle": "الأخلاق",
+  "@kidsFaithMannersTitle": {
+    "description": "Kids: title of the manners section (needs the owner's wording check)"
+  },
+  "kidsFaithAdhkarTitle": "الأذكار",
+  "@kidsFaithAdhkarTitle": {
+    "description": "Kids: title of the adhkar section (design screen 13)"
+  },
+  "kidsFaithSoonTitle": "قريبًا",
+  "@kidsFaithSoonTitle": {
+    "description": "Kids: calm empty state while nothing is approved yet"
+  },
+  "kidsFaithSoonBody": "لسا بنجهّزها إلك بكل عناية. ارجع بعدين!",
+  "@kidsFaithSoonBody": {
+    "description": "Kids: body of the calm empty state"
+  },
+  "kidsFaithHome": "البيت",
+  "@kidsFaithHome": {
+    "description": "Kids: tooltip of the home button"
+  },
+  "kidsFaithListen": "اسمع",
+  "@kidsFaithListen": {
+    "description": "Kids: play button label"
+  },
+  "kidsFaithPause": "وقّف",
+  "@kidsFaithPause": {
+    "description": "Kids: pause button label"
+  },
+  "kidsFaithAgain": "عيد",
+  "@kidsFaithAgain": {
+    "description": "Kids: try again button"
+  },
+  "kidsFaithNext": "التالي",
+  "@kidsFaithNext": {
+    "description": "Kids: next button"
+  },
+  "kidsFaithPrevious": "السابق",
+  "@kidsFaithPrevious": {
+    "description": "Kids: previous button"
+  },
+  "kidsFaithTryYourself": "جرّب أنت",
+  "@kidsFaithTryYourself": {
+    "description": "Kids: opens the recitation check"
+  },
+  "kidsFaithRepeatAyah": "عيد الآية",
+  "@kidsFaithRepeatAyah": {
+    "description": "Kids: replays the current ayah"
+  },
+  "kidsFaithAyahOfTotal": "الآية {n} من {total}",
+  "@kidsFaithAyahOfTotal": {
+    "description": "Kids: position inside a surah; both numbers arrive already formatted",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsFaithAudioNotDownloaded": "الصوت مش محمّل",
+  "@kidsFaithAudioNotDownloaded": {
+    "description": "Kids: calm note when the recitation is not on the phone"
+  },
+  "kidsFaithAudioNotDownloadedHint": "اطلب من أهلك يحمّلوه من قسم القرآن.",
+  "@kidsFaithAudioNotDownloadedHint": {
+    "description": "Kids: what to do about the missing sound"
+  },
+  "kidsFaithReciter": "القارئ: {name}",
+  "@kidsFaithReciter": {
+    "description": "Kids: the reciter heard",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsFaithListening": "بسمعك…",
+  "@kidsFaithListening": {
+    "description": "Kids: shown while the microphone listens"
+  },
+  "kidsFaithTapToSpeak": "المس واقرأ",
+  "@kidsFaithTapToSpeak": {
+    "description": "Kids: microphone button label"
+  },
+  "kidsFaithSoftRetryTitle": "ما سمعت منيح، عيد",
+  "@kidsFaithSoftRetryTitle": {
+    "description": "Kids: shown when the recognition is not confident. Never a mistake message"
+  },
+  "kidsFaithSoftRetryBody": "ولا يهمك! جرّب كمان مرّة، أنا بسمعك.",
+  "@kidsFaithSoftRetryBody": {
+    "description": "Kids: body of the soft retry card"
+  },
+  "kidsFaithStarsSafe": "نجومك محفوظة زي ما هي",
+  "@kidsFaithStarsSafe": {
+    "description": "Kids: reassurance under the soft retry card"
+  },
+  "kidsFaithWellDoneTitle": "أحسنت!",
+  "@kidsFaithWellDoneTitle": {
+    "description": "Kids: confident hearing"
+  },
+  "kidsFaithWellDoneBody": "قرأتها حلو. نجمة جديدة إلك!",
+  "@kidsFaithWellDoneBody": {
+    "description": "Kids: body of the well-done card"
+  },
+  "kidsFaithStarNow": "نجمتك صارت {n}",
+  "@kidsFaithStarNow": {
+    "description": "Kids: star count after a new star (already formatted)",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsFaithNextAyah": "الآية الجاية",
+  "@kidsFaithNextAyah": {
+    "description": "Kids: after a well-done result"
+  },
+  "kidsFaithTabWudu": "الوضوء",
+  "@kidsFaithTabWudu": {
+    "description": "Kids: tab of the steps screen"
+  },
+  "kidsFaithTabPrayer": "الصلاة",
+  "@kidsFaithTabPrayer": {
+    "description": "Kids: tab of the steps screen"
+  },
+  "kidsFaithStepBadge": "الخطوة {n}",
+  "@kidsFaithStepBadge": {
+    "description": "Kids: accessibility label of the step badge (number already formatted)",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsFaithPageOfTotal": "{n} من {total}",
+  "@kidsFaithPageOfTotal": {
+    "description": "Kids: page or step position (both already formatted)",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsFaithMorning": "الصباح",
+  "@kidsFaithMorning": {
+    "description": "Kids: adhkar tab"
+  },
+  "kidsFaithEvening": "المساء",
+  "@kidsFaithEvening": {
+    "description": "Kids: adhkar tab"
+  },
+  "kidsFaithNextDhikr": "الذكر الجاي",
+  "@kidsFaithNextDhikr": {
+    "description": "Kids: next adhkar item"
+  },
+  "kidsFaithTapCircle": "المس الدايرة كل ما تقول الذكر",
+  "@kidsFaithTapCircle": {
+    "description": "Kids: how the bead counter works"
+  },
+  "kidsFaithBeadsOfTotal": "من {total}",
+  "@kidsFaithBeadsOfTotal": {
+    "description": "Kids: under the bead counter number (total already formatted)",
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsFaithBeadsDone": "خلّص العدّ!",
+  "@kidsFaithBeadsDone": {
+    "description": "Kids: the bead circle is full"
+  },
+  "kidsFaithStoryPicker": "اختر قصة",
+  "@kidsFaithStoryPicker": {
+    "description": "Kids: heading of the story list"
+  },
+  "kidsLettersTitle": "الحروف",
+  "@kidsLettersTitle": {
+    "description": "Kids: title of the Arabic letters section (design 07a)"
+  },
+  "kidsMathsTitle": "الحساب",
+  "@kidsMathsTitle": {
+    "description": "Kids: title of the maths section (design 07b)"
+  },
+  "kidsColouringTitle": "التلوين",
+  "@kidsColouringTitle": {
+    "description": "Kids: title of the colouring section (design 08a)"
+  },
+  "kidsLettersLetterOf": "حرف {name}",
+  "@kidsLettersLetterOf": {
+    "description": "Kids letters: card title, e.g. the letter Ain",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsLettersTapHear": "المس وسمّع الحرف",
+  "@kidsLettersTapHear": {
+    "description": "Kids letters: hint under the letter's name"
+  },
+  "kidsLettersFormIsolated": "وحدها",
+  "@kidsLettersFormIsolated": {
+    "description": "Kids letters: label of the letter written on its own"
+  },
+  "kidsLettersFormInitial": "أول الكلمة",
+  "@kidsLettersFormInitial": {
+    "description": "Kids letters: label of the letter at the start of a word"
+  },
+  "kidsLettersFormMedial": "وسط الكلمة",
+  "@kidsLettersFormMedial": {
+    "description": "Kids letters: label of the letter in the middle of a word"
+  },
+  "kidsLettersFormFinal": "آخر الكلمة",
+  "@kidsLettersFormFinal": {
+    "description": "Kids letters: label of the letter at the end of a word"
+  },
+  "kidsLettersTraceCta": "اكتب الحرف بإصبعك",
+  "@kidsLettersTraceCta": {
+    "description": "Kids letters: button that opens the finger tracing canvas"
+  },
+  "kidsLettersTraceHint": "مرّر إصبعك فوق الحرف",
+  "@kidsLettersTraceHint": {
+    "description": "Kids letters: hint on the tracing canvas"
+  },
+  "kidsLettersTraceGood": "حلو كتير!",
+  "@kidsLettersTraceGood": {
+    "description": "Kids letters: friendly message once the child has traced for a while"
+  },
+  "kidsLettersTraceClear": "امسح وجرّب من جديد",
+  "@kidsLettersTraceClear": {
+    "description": "Kids letters: clears the finger tracing"
+  },
+  "kidsLettersNext": "الحرف الجاي",
+  "@kidsLettersNext": {
+    "description": "Kids letters: goes to the next letter"
+  },
+  "kidsLettersPrevious": "الحرف اللي قبله",
+  "@kidsLettersPrevious": {
+    "description": "Kids letters: screen-reader label of the previous-letter button"
+  },
+  "kidsLettersBack": "رجوع للحروف",
+  "@kidsLettersBack": {
+    "description": "Kids letters: goes back from tracing or the quiz to the letter card"
+  },
+  "kidsLettersQuizCta": "أي حرف هاد؟",
+  "@kidsLettersQuizCta": {
+    "description": "Kids letters: the quiz title and the button that opens it"
+  },
+  "kidsLettersQuizRetry": "جرّب مرة ثانية",
+  "@kidsLettersQuizRetry": {
+    "description": "Kids letters: soft retry in amber. Never says wrong"
+  },
+  "kidsLettersQuizGood": "أحسنت!",
+  "@kidsLettersQuizGood": {
+    "description": "Kids letters: shown on a right answer"
+  },
+  "kidsLettersQuizNext": "الجاي",
+  "@kidsLettersQuizNext": {
+    "description": "Kids letters: goes to the next quiz question"
+  },
+  "kidsLettersQuizDone": "خلصت الجولة! أخدت نجمة",
+  "@kidsLettersQuizDone": {
+    "description": "Kids letters: end of a quiz round"
+  },
+  "kidsLettersQuizAgain": "جولة جديدة",
+  "@kidsLettersQuizAgain": {
+    "description": "Kids letters: starts another quiz round"
+  },
+  "kidsLettersQuizProgress": "السؤال {n} من {total}",
+  "@kidsLettersQuizProgress": {
+    "description": "Kids letters: screen-reader label of quiz progress",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsLearnHear": "اسمع",
+  "@kidsLearnHear": {
+    "description": "Kids: screen-reader label of every speaker button"
+  },
+  "kidsMathsTabMul": "الضرب",
+  "@kidsMathsTabMul": {
+    "description": "Kids maths: multiplication tab"
+  },
+  "kidsMathsTabDiv": "القسمة",
+  "@kidsMathsTabDiv": {
+    "description": "Kids maths: division tab"
+  },
+  "kidsMathsTabFrac": "الكسور",
+  "@kidsMathsTabFrac": {
+    "description": "Kids maths: fractions tab"
+  },
+  "kidsMathsRowsCaption": "{rows, plural, =1{صف واحد} =2{صفّين} few{{rows} صفوف} many{{rows} صفًّا} other{{rows} صف}}، في كل صف {cols}",
+  "@kidsMathsRowsCaption": {
+    "description": "Kids maths: caption under the dot array of a multiplication",
+    "placeholders": {
+      "rows": {
+        "type": "int"
+      },
+      "cols": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsMathsDivCaption": "وزّع {total} على {groups} بالتساوي",
+  "@kidsMathsDivCaption": {
+    "description": "Kids maths: caption under the groups of a division",
+    "placeholders": {
+      "total": {
+        "type": "int"
+      },
+      "groups": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsMathsPieCaption": "أي كسر هو الجزء الملوّن؟",
+  "@kidsMathsPieCaption": {
+    "description": "Kids maths: caption under the pie"
+  },
+  "kidsMathsOfCaption": "{frac} من {total}",
+  "@kidsMathsOfCaption": {
+    "description": "Kids maths: fraction of an amount, e.g. three quarters of twelve",
+    "placeholders": {
+      "frac": {
+        "type": "String"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsMathsOf": "من",
+  "@kidsMathsOf": {
+    "description": "Kids maths: the word between a fraction and the amount it is taken from"
+  },
+  "kidsMathsTryAgain": "جرّب مرّة ثانية",
+  "@kidsMathsTryAgain": {
+    "description": "Kids maths: soft retry in amber. Never says wrong"
+  },
+  "kidsMathsGood": "أحسنت!",
+  "@kidsMathsGood": {
+    "description": "Kids maths: shown on a right answer"
+  },
+  "kidsMathsNext": "الجاي",
+  "@kidsMathsNext": {
+    "description": "Kids maths: next question"
+  },
+  "kidsMathsSetDone": "خلصت المجموعة! أخدت نجمة",
+  "@kidsMathsSetDone": {
+    "description": "Kids maths: end of a set of questions"
+  },
+  "kidsMathsNewSet": "مجموعة جديدة",
+  "@kidsMathsNewSet": {
+    "description": "Kids maths: starts another set"
+  },
+  "kidsMathsProgress": "السؤال {n} من {total}",
+  "@kidsMathsProgress": {
+    "description": "Kids maths: screen-reader label of set progress",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsMathsChoiceLabel": "الجواب {value}",
+  "@kidsMathsChoiceLabel": {
+    "description": "Kids maths: screen-reader label of an answer button",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsColAddTitle": "أضيف صورة من جوالي",
+  "@kidsColAddTitle": {
+    "description": "Kids colouring: title of the import card"
+  },
+  "kidsColAddSub": "بتضلّ على جوالك، وما بتروح لأي مكان",
+  "@kidsColAddSub": {
+    "description": "Kids colouring: promise under the import card title"
+  },
+  "kidsColPickFile": "اختر ملف",
+  "@kidsColPickFile": {
+    "description": "Kids colouring: button that opens the file picker"
+  },
+  "kidsColParentOnly": "للأهل",
+  "@kidsColParentOnly": {
+    "description": "Kids colouring: tag on things that open behind the parent gate"
+  },
+  "kidsColMine": "صوري",
+  "@kidsColMine": {
+    "description": "Kids colouring: heading of the pictures the parent added"
+  },
+  "kidsColMadar": "صور المدار",
+  "@kidsColMadar": {
+    "description": "Kids colouring: heading of the built-in geometric pages"
+  },
+  "kidsColMineTag": "صورتي",
+  "@kidsColMineTag": {
+    "description": "Kids colouring: small tag on a picture the parent added"
+  },
+  "kidsColPatternName": "نقش {number}",
+  "@kidsColPatternName": {
+    "description": "Kids colouring: name of a built-in page",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsColPictureName": "صورة {number}",
+  "@kidsColPictureName": {
+    "description": "Kids colouring: name of an imported picture",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "kidsColDone": "خلصت",
+  "@kidsColDone": {
+    "description": "Kids colouring: saves and goes back to the gallery"
+  },
+  "kidsColUndo": "رجّع آخر لون",
+  "@kidsColUndo": {
+    "description": "Kids colouring: undo button label"
+  },
+  "kidsColEraser": "ممحاة",
+  "@kidsColEraser": {
+    "description": "Kids colouring: eraser button label"
+  },
+  "kidsColClear": "ابدأ من جديد",
+  "@kidsColClear": {
+    "description": "Kids colouring: clears all colours of the page"
+  },
+  "kidsColBack": "رجوع للمعرض",
+  "@kidsColBack": {
+    "description": "Kids colouring: goes back to the gallery"
+  },
+  "kidsColSwatch": "لون {n}",
+  "@kidsColSwatch": {
+    "description": "Kids colouring: screen-reader label of a colour button",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsColSaved": "الصورة وألوانها محفوظة على جوالك فقط",
+  "@kidsColSaved": {
+    "description": "Kids colouring: privacy line under the page"
+  },
+  "kidsColBadFile": "هالملف ما زبط",
+  "@kidsColBadFile": {
+    "description": "Kids colouring: soft title when an import fails"
+  },
+  "kidsColNotImage": "هذا مش ملف صورة. اختر صورة تانية.",
+  "@kidsColNotImage": {
+    "description": "Kids colouring: the file was not an image"
+  },
+  "kidsColTooBig": "هالصورة كبيرة كتير. اختر صورة أصغر.",
+  "@kidsColTooBig": {
+    "description": "Kids colouring: the image was too large"
+  },
+  "kidsColCantRead": "ما قدرنا نفتح الصورة. جرّب صورة تانية.",
+  "@kidsColCantRead": {
+    "description": "Kids colouring: the image could not be read"
+  },
+  "kidsColPrepTitle": "جهّز الصورة للتلوين",
+  "@kidsColPrepTitle": {
+    "description": "Kids colouring: parent step after picking a file"
+  },
+  "kidsColPrepPhotoHint": "هاي شكلها صورة عادية. حوّلها لخطوط عشان تصير سهلة للتلوين.",
+  "@kidsColPrepPhotoHint": {
+    "description": "Kids colouring: suggestion for a photograph"
+  },
+  "kidsColPrepLinesHint": "هاي شكلها رسمة بخطوط. فيك تستخدمها كما هي.",
+  "@kidsColPrepLinesHint": {
+    "description": "Kids colouring: suggestion for a line drawing"
+  },
+  "kidsColPrepAsIs": "استخدمها كما هي",
+  "@kidsColPrepAsIs": {
+    "description": "Kids colouring: keep the picture's own lines"
+  },
+  "kidsColPrepOutline": "حوّلها لخطوط",
+  "@kidsColPrepOutline": {
+    "description": "Kids colouring: automatic outline of a photograph"
+  },
+  "kidsColLevelLow": "خطوط قليلة",
+  "@kidsColLevelLow": {
+    "description": "Kids colouring: outline detail, low"
+  },
+  "kidsColLevelMid": "خطوط وسط",
+  "@kidsColLevelMid": {
+    "description": "Kids colouring: outline detail, medium"
+  },
+  "kidsColLevelHigh": "خطوط كتير",
+  "@kidsColLevelHigh": {
+    "description": "Kids colouring: outline detail, high"
+  },
+  "kidsColSavePicture": "احفظ الصورة",
+  "@kidsColSavePicture": {
+    "description": "Kids colouring: adds the prepared picture to the gallery"
+  },
+  "kidsColCancel": "إلغاء",
+  "@kidsColCancel": {
+    "description": "Kids colouring: cancels the import"
+  },
+  "kidsColDelete": "احذف الصورة",
+  "@kidsColDelete": {
+    "description": "Kids colouring: parent deletes an imported picture"
+  },
+  "kidsColDeleteAsk": "بدك تحذف هالصورة وألوانها؟",
+  "@kidsColDeleteAsk": {
+    "description": "Kids colouring: parent confirmation"
+  },
+  "kidsColDeleteYes": "احذفها",
+  "@kidsColDeleteYes": {
+    "description": "Kids colouring: confirms the delete"
+  },
+  "kidsColWorking": "لحظة، عم نجهّز الصورة…",
+  "@kidsColWorking": {
+    "description": "Kids colouring: shown while a picture is processed"
+  },
+  "kidsShellEntryTitle": "مدار الصغار",
+  "@kidsShellEntryTitle": {
+    "description": "Title of the kids-mode card at the top of Settings"
+  },
+  "kidsShellEntrySubtitle": "مكان آمن للّعب والتعلّم",
+  "kidsShellEntryButton": "ادخل",
+  "@kidsShellEntryButton": {
+    "description": "The one tap that puts the phone into kids mode"
+  },
+  "kidsShellEntryRule": "الدخول بلمسة وحدة. الخروج بالرقم السري أو البصمة فقط.",
+  "kidsShellNeedPinTitle": "لازم رقم سري أول",
+  "kidsShellNeedPinBody": "قبل ما يدخل الصغار، لازم الأهل يحطّوا رقم سري. هو اللي بيفتح الباب لما يخلصوا.",
+  "kidsShellNeedPinAction": "حطّ الرقم السري",
+  "kidsShellPinOfferBadge": "للأهل",
+  "kidsShellPinOfferTitle": "نثبّت الشاشة؟",
+  "kidsShellPinOfferBody": "تثبيت الشاشة بيخلّي الجوال على مدار الصغار فقط، وما بيطلع منه إلا الأهل.",
+  "kidsShellPinOfferYes": "ثبّت الشاشة",
+  "kidsShellPinOfferNo": "مش هلأ، كمّل بدون تثبيت",
+  "kidsShellPinOfferLater": "بتقدر تغيّرها بعدين من إعدادات الأهل.",
+  "kidsShellGreeting": "أهلاً يا نجم!",
+  "kidsShellGreetingSub": "وين بدّك تروح اليوم؟",
+  "kidsShellLockSemantics": "ركن الأهل",
+  "kidsShellStars": "{count, plural, =0{لا نجوم} =1{نجمة واحدة} =2{نجمتان} few{{count} نجمات} many{{count} نجمة} other{{count} نجمة}}",
+  "@kidsShellStars": {
+    "description": "Star count chip on the kids home",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellTimeLeft": "{count, plural, =0{خلص الوقت} =1{باقي دقيقة} =2{باقي دقيقتان} few{باقي {count} دقائق} many{باقي {count} دقيقة} other{باقي {count} دقيقة}}",
+  "@kidsShellTimeLeft": {
+    "description": "Time-left chip on the kids home",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellWarning": "{count, plural, =0{هلأ بنخلّص} =1{باقي دقيقة} =2{باقي دقيقتان} few{باقي {count} دقائق} many{باقي {count} دقيقة} other{باقي {count} دقيقة}}",
+  "@kidsShellWarning": {
+    "description": "Gentle warning pill shortly before the daily time ends",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellEmptyTitle": "لسا ما في عوالم هون",
+  "kidsShellEmptyBody": "قريباً بنضيف ألعاب وقصص جديدة.",
+  "kidsShellSectionMissing": "هالعالم مش موجود",
+  "kidsShellHomeSemantics": "رجوع للرئيسية",
+  "kidsShellGateTitle": "ركن الأهل",
+  "kidsShellGateBody": "اكتب الرقم السري أو المس البصمة عشان تطلع من مدار الصغار",
+  "kidsShellGateBack": "رجوع للّعب",
+  "kidsShellGateTryAgain": "جرّب مرّة ثانية",
+  "kidsShellGatePause": "{count, plural, =0{جرّب هلأ} =1{جرّب بعد ثانية} =2{جرّب بعد ثانيتين} few{خلّينا ناخد استراحة صغيرة. جرّب بعد {count} ثواني.} many{خلّينا ناخد استراحة صغيرة. جرّب بعد {count} ثانية.} other{خلّينا ناخد استراحة صغيرة. جرّب بعد {count} ثانية.}}",
+  "@kidsShellGatePause": {
+    "description": "Calm pause after three wrong PINs; never blames the child",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellGateFingerprint": "البصمة",
+  "kidsShellGateDelete": "مسح",
+  "kidsShellGateUnavailable": "ما قدرنا نتأكّد هلأ. جرّب مرّة ثانية.",
+  "kidsShellGateBioReason": "لمسة من الأهل عشان نطلع من مدار الصغار",
+  "kidsShellGateBioTitle": "ركن الأهل",
+  "kidsShellGateBioHint": "المس مستشعر البصمة",
+  "kidsShellGateBioCancel": "استخدم الرقم السري",
+  "kidsShellCornerTitle": "ركن الأهل",
+  "kidsShellCornerLeave": "اطلع من مدار الصغار",
+  "kidsShellCornerLeaveHint": "بترجع لمدار العادي.",
+  "kidsShellCornerTimeTitle": "وقت اللعب باليوم",
+  "kidsShellCornerTimeValue": "{count, plural, =0{بدون حدّ} =1{دقيقة واحدة} =2{دقيقتان} few{{count} دقائق} many{{count} دقيقة} other{{count} دقيقة}}",
+  "@kidsShellCornerTimeValue": {
+    "description": "The daily limit; zero means off",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellCornerTimeHint": "بيبدأ من جديد كل يوم عند نص الليل. الصفر يعني بدون حدّ.",
+  "kidsShellCornerTimeUsed": "{count, plural, =0{لسا ما لعب اليوم} =1{لعب اليوم دقيقة واحدة} =2{لعب اليوم دقيقتين} few{لعب اليوم {count} دقائق} many{لعب اليوم {count} دقيقة} other{لعب اليوم {count} دقيقة}}",
+  "@kidsShellCornerTimeUsed": {
+    "description": "Minutes of kids time used today",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellCornerMore": "زيادة",
+  "kidsShellCornerLess": "نقصان",
+  "kidsShellCornerPinTitle": "تثبيت الشاشة",
+  "kidsShellCornerPinOn": "الشاشة مثبّتة هلأ.",
+  "kidsShellCornerPinOff": "الشاشة مش مثبّتة.",
+  "kidsShellCornerPinAction": "ثبّت الشاشة",
+  "kidsShellCornerPinUnsupported": "هالجوال ما بيدعم تثبيت الشاشة من هون.",
+  "kidsShellCornerReligiousTitle": "المحتوى الديني",
+  "kidsShellCornerReligiousHidden": "مخفي لحد ما يتسمّى الشيخ المراجع.",
+  "kidsShellCornerBack": "رجوع للّعب",
+  "kidsShellEndTitle": "خلص وقت اللعب اليوم",
+  "kidsShellEndBody": "أخذت استراحة حلوة. منكمّل بكرا!",
+  "kidsShellEndStars": "{count, plural, =0{نجومك محفوظة} =1{نجمة محفوظة} =2{نجمتان محفوظتان} few{{count} نجمات محفوظة} many{{count} نجمة محفوظة} other{{count} نجمة محفوظة}}",
+  "@kidsShellEndStars": {
+    "description": "Stars kept, shown on the end screen",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kidsShellEndOk": "تمام",
+  "kidsShellEndParent": "للأهل: زيادة الوقت",
+  "kidsShellSpeak": "اسمعها",
   "tasmeeTitle": "التسميع",
   "@tasmeeTitle": {
     "description": "Part 13: reciting out loud and being checked against the verified text"

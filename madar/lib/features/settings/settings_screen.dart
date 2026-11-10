@@ -13,6 +13,7 @@ import '../../core/routing/routes.dart';
 import '../../core/settings/app_settings.dart';
 import '../../core/sound/sound.dart';
 import '../adhan/presentation/adhan_permissions_card.dart';
+import '../kids/shell/presentation/kids_entry_card.dart' show KidsEntryCard;
 import '../health/wellbeing/wellbeing.dart' show WellbeingSettings, wellbeingSettingsProvider;
 import '../lock/application/lock_controller.dart';
 import '../orbit/data/orbit_providers.dart' show prayerSettingsProvider;
@@ -68,6 +69,8 @@ class SettingsScreen extends ConsumerWidget {
         horizontal: Space.gutter,
         top: Space.xs,
         children: [
+          // «مدار الصغار»: one tap in, the PIN or the fingerprint to get out.
+          const KidsEntryCard(),
           // Glass panels only slide in: a fade is a save layer, and the
           // panels' backdrop blur would sample nothing until it ends.
           StaggerIn(

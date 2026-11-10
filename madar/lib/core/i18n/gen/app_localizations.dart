@@ -44104,6 +44104,1026 @@ abstract class L10n {
   /// **'قبضت، بس ما قلت قديش'**
   String get dayChatTitleIncomeUnknownBare;
 
+  /// Kids: title of the short-surahs reader (name taken from design screen 03)
+  ///
+  /// In ar, this message translates to:
+  /// **'جزء عمّ'**
+  String get kidsFaithJuzAmmaTitle;
+
+  /// Kids: title of the steps section (design screen 05)
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلاة والوضوء'**
+  String get kidsFaithPrayerWuduTitle;
+
+  /// Kids: title of the stories section (design screen 06)
+  ///
+  /// In ar, this message translates to:
+  /// **'القصص'**
+  String get kidsFaithStoriesTitle;
+
+  /// Kids: title of the manners section (needs the owner's wording check)
+  ///
+  /// In ar, this message translates to:
+  /// **'الأخلاق'**
+  String get kidsFaithMannersTitle;
+
+  /// Kids: title of the adhkar section (design screen 13)
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذكار'**
+  String get kidsFaithAdhkarTitle;
+
+  /// Kids: calm empty state while nothing is approved yet
+  ///
+  /// In ar, this message translates to:
+  /// **'قريبًا'**
+  String get kidsFaithSoonTitle;
+
+  /// Kids: body of the calm empty state
+  ///
+  /// In ar, this message translates to:
+  /// **'لسا بنجهّزها إلك بكل عناية. ارجع بعدين!'**
+  String get kidsFaithSoonBody;
+
+  /// Kids: tooltip of the home button
+  ///
+  /// In ar, this message translates to:
+  /// **'البيت'**
+  String get kidsFaithHome;
+
+  /// Kids: play button label
+  ///
+  /// In ar, this message translates to:
+  /// **'اسمع'**
+  String get kidsFaithListen;
+
+  /// Kids: pause button label
+  ///
+  /// In ar, this message translates to:
+  /// **'وقّف'**
+  String get kidsFaithPause;
+
+  /// Kids: try again button
+  ///
+  /// In ar, this message translates to:
+  /// **'عيد'**
+  String get kidsFaithAgain;
+
+  /// Kids: next button
+  ///
+  /// In ar, this message translates to:
+  /// **'التالي'**
+  String get kidsFaithNext;
+
+  /// Kids: previous button
+  ///
+  /// In ar, this message translates to:
+  /// **'السابق'**
+  String get kidsFaithPrevious;
+
+  /// Kids: opens the recitation check
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب أنت'**
+  String get kidsFaithTryYourself;
+
+  /// Kids: replays the current ayah
+  ///
+  /// In ar, this message translates to:
+  /// **'عيد الآية'**
+  String get kidsFaithRepeatAyah;
+
+  /// Kids: position inside a surah; both numbers arrive already formatted
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية {n} من {total}'**
+  String kidsFaithAyahOfTotal(String n, String total);
+
+  /// Kids: calm note when the recitation is not on the phone
+  ///
+  /// In ar, this message translates to:
+  /// **'الصوت مش محمّل'**
+  String get kidsFaithAudioNotDownloaded;
+
+  /// Kids: what to do about the missing sound
+  ///
+  /// In ar, this message translates to:
+  /// **'اطلب من أهلك يحمّلوه من قسم القرآن.'**
+  String get kidsFaithAudioNotDownloadedHint;
+
+  /// Kids: the reciter heard
+  ///
+  /// In ar, this message translates to:
+  /// **'القارئ: {name}'**
+  String kidsFaithReciter(String name);
+
+  /// Kids: shown while the microphone listens
+  ///
+  /// In ar, this message translates to:
+  /// **'بسمعك…'**
+  String get kidsFaithListening;
+
+  /// Kids: microphone button label
+  ///
+  /// In ar, this message translates to:
+  /// **'المس واقرأ'**
+  String get kidsFaithTapToSpeak;
+
+  /// Kids: shown when the recognition is not confident. Never a mistake message
+  ///
+  /// In ar, this message translates to:
+  /// **'ما سمعت منيح، عيد'**
+  String get kidsFaithSoftRetryTitle;
+
+  /// Kids: body of the soft retry card
+  ///
+  /// In ar, this message translates to:
+  /// **'ولا يهمك! جرّب كمان مرّة، أنا بسمعك.'**
+  String get kidsFaithSoftRetryBody;
+
+  /// Kids: reassurance under the soft retry card
+  ///
+  /// In ar, this message translates to:
+  /// **'نجومك محفوظة زي ما هي'**
+  String get kidsFaithStarsSafe;
+
+  /// Kids: confident hearing
+  ///
+  /// In ar, this message translates to:
+  /// **'أحسنت!'**
+  String get kidsFaithWellDoneTitle;
+
+  /// Kids: body of the well-done card
+  ///
+  /// In ar, this message translates to:
+  /// **'قرأتها حلو. نجمة جديدة إلك!'**
+  String get kidsFaithWellDoneBody;
+
+  /// Kids: star count after a new star (already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'نجمتك صارت {n}'**
+  String kidsFaithStarNow(String n);
+
+  /// Kids: after a well-done result
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية الجاية'**
+  String get kidsFaithNextAyah;
+
+  /// Kids: tab of the steps screen
+  ///
+  /// In ar, this message translates to:
+  /// **'الوضوء'**
+  String get kidsFaithTabWudu;
+
+  /// Kids: tab of the steps screen
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلاة'**
+  String get kidsFaithTabPrayer;
+
+  /// Kids: accessibility label of the step badge (number already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطوة {n}'**
+  String kidsFaithStepBadge(String n);
+
+  /// Kids: page or step position (both already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'{n} من {total}'**
+  String kidsFaithPageOfTotal(String n, String total);
+
+  /// Kids: adhkar tab
+  ///
+  /// In ar, this message translates to:
+  /// **'الصباح'**
+  String get kidsFaithMorning;
+
+  /// Kids: adhkar tab
+  ///
+  /// In ar, this message translates to:
+  /// **'المساء'**
+  String get kidsFaithEvening;
+
+  /// Kids: next adhkar item
+  ///
+  /// In ar, this message translates to:
+  /// **'الذكر الجاي'**
+  String get kidsFaithNextDhikr;
+
+  /// Kids: how the bead counter works
+  ///
+  /// In ar, this message translates to:
+  /// **'المس الدايرة كل ما تقول الذكر'**
+  String get kidsFaithTapCircle;
+
+  /// Kids: under the bead counter number (total already formatted)
+  ///
+  /// In ar, this message translates to:
+  /// **'من {total}'**
+  String kidsFaithBeadsOfTotal(String total);
+
+  /// Kids: the bead circle is full
+  ///
+  /// In ar, this message translates to:
+  /// **'خلّص العدّ!'**
+  String get kidsFaithBeadsDone;
+
+  /// Kids: heading of the story list
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر قصة'**
+  String get kidsFaithStoryPicker;
+
+  /// Kids: title of the Arabic letters section (design 07a)
+  ///
+  /// In ar, this message translates to:
+  /// **'الحروف'**
+  String get kidsLettersTitle;
+
+  /// Kids: title of the maths section (design 07b)
+  ///
+  /// In ar, this message translates to:
+  /// **'الحساب'**
+  String get kidsMathsTitle;
+
+  /// Kids: title of the colouring section (design 08a)
+  ///
+  /// In ar, this message translates to:
+  /// **'التلوين'**
+  String get kidsColouringTitle;
+
+  /// Kids letters: card title, e.g. the letter Ain
+  ///
+  /// In ar, this message translates to:
+  /// **'حرف {name}'**
+  String kidsLettersLetterOf(String name);
+
+  /// Kids letters: hint under the letter's name
+  ///
+  /// In ar, this message translates to:
+  /// **'المس وسمّع الحرف'**
+  String get kidsLettersTapHear;
+
+  /// Kids letters: label of the letter written on its own
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدها'**
+  String get kidsLettersFormIsolated;
+
+  /// Kids letters: label of the letter at the start of a word
+  ///
+  /// In ar, this message translates to:
+  /// **'أول الكلمة'**
+  String get kidsLettersFormInitial;
+
+  /// Kids letters: label of the letter in the middle of a word
+  ///
+  /// In ar, this message translates to:
+  /// **'وسط الكلمة'**
+  String get kidsLettersFormMedial;
+
+  /// Kids letters: label of the letter at the end of a word
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر الكلمة'**
+  String get kidsLettersFormFinal;
+
+  /// Kids letters: button that opens the finger tracing canvas
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب الحرف بإصبعك'**
+  String get kidsLettersTraceCta;
+
+  /// Kids letters: hint on the tracing canvas
+  ///
+  /// In ar, this message translates to:
+  /// **'مرّر إصبعك فوق الحرف'**
+  String get kidsLettersTraceHint;
+
+  /// Kids letters: friendly message once the child has traced for a while
+  ///
+  /// In ar, this message translates to:
+  /// **'حلو كتير!'**
+  String get kidsLettersTraceGood;
+
+  /// Kids letters: clears the finger tracing
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح وجرّب من جديد'**
+  String get kidsLettersTraceClear;
+
+  /// Kids letters: goes to the next letter
+  ///
+  /// In ar, this message translates to:
+  /// **'الحرف الجاي'**
+  String get kidsLettersNext;
+
+  /// Kids letters: screen-reader label of the previous-letter button
+  ///
+  /// In ar, this message translates to:
+  /// **'الحرف اللي قبله'**
+  String get kidsLettersPrevious;
+
+  /// Kids letters: goes back from tracing or the quiz to the letter card
+  ///
+  /// In ar, this message translates to:
+  /// **'رجوع للحروف'**
+  String get kidsLettersBack;
+
+  /// Kids letters: the quiz title and the button that opens it
+  ///
+  /// In ar, this message translates to:
+  /// **'أي حرف هاد؟'**
+  String get kidsLettersQuizCta;
+
+  /// Kids letters: soft retry in amber. Never says wrong
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب مرة ثانية'**
+  String get kidsLettersQuizRetry;
+
+  /// Kids letters: shown on a right answer
+  ///
+  /// In ar, this message translates to:
+  /// **'أحسنت!'**
+  String get kidsLettersQuizGood;
+
+  /// Kids letters: goes to the next quiz question
+  ///
+  /// In ar, this message translates to:
+  /// **'الجاي'**
+  String get kidsLettersQuizNext;
+
+  /// Kids letters: end of a quiz round
+  ///
+  /// In ar, this message translates to:
+  /// **'خلصت الجولة! أخدت نجمة'**
+  String get kidsLettersQuizDone;
+
+  /// Kids letters: starts another quiz round
+  ///
+  /// In ar, this message translates to:
+  /// **'جولة جديدة'**
+  String get kidsLettersQuizAgain;
+
+  /// Kids letters: screen-reader label of quiz progress
+  ///
+  /// In ar, this message translates to:
+  /// **'السؤال {n} من {total}'**
+  String kidsLettersQuizProgress(int n, int total);
+
+  /// Kids: screen-reader label of every speaker button
+  ///
+  /// In ar, this message translates to:
+  /// **'اسمع'**
+  String get kidsLearnHear;
+
+  /// Kids maths: multiplication tab
+  ///
+  /// In ar, this message translates to:
+  /// **'الضرب'**
+  String get kidsMathsTabMul;
+
+  /// Kids maths: division tab
+  ///
+  /// In ar, this message translates to:
+  /// **'القسمة'**
+  String get kidsMathsTabDiv;
+
+  /// Kids maths: fractions tab
+  ///
+  /// In ar, this message translates to:
+  /// **'الكسور'**
+  String get kidsMathsTabFrac;
+
+  /// Kids maths: caption under the dot array of a multiplication
+  ///
+  /// In ar, this message translates to:
+  /// **'{rows, plural, =1{صف واحد} =2{صفّين} few{{rows} صفوف} many{{rows} صفًّا} other{{rows} صف}}، في كل صف {cols}'**
+  String kidsMathsRowsCaption(int rows, int cols);
+
+  /// Kids maths: caption under the groups of a division
+  ///
+  /// In ar, this message translates to:
+  /// **'وزّع {total} على {groups} بالتساوي'**
+  String kidsMathsDivCaption(int total, int groups);
+
+  /// Kids maths: caption under the pie
+  ///
+  /// In ar, this message translates to:
+  /// **'أي كسر هو الجزء الملوّن؟'**
+  String get kidsMathsPieCaption;
+
+  /// Kids maths: fraction of an amount, e.g. three quarters of twelve
+  ///
+  /// In ar, this message translates to:
+  /// **'{frac} من {total}'**
+  String kidsMathsOfCaption(String frac, int total);
+
+  /// Kids maths: the word between a fraction and the amount it is taken from
+  ///
+  /// In ar, this message translates to:
+  /// **'من'**
+  String get kidsMathsOf;
+
+  /// Kids maths: soft retry in amber. Never says wrong
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب مرّة ثانية'**
+  String get kidsMathsTryAgain;
+
+  /// Kids maths: shown on a right answer
+  ///
+  /// In ar, this message translates to:
+  /// **'أحسنت!'**
+  String get kidsMathsGood;
+
+  /// Kids maths: next question
+  ///
+  /// In ar, this message translates to:
+  /// **'الجاي'**
+  String get kidsMathsNext;
+
+  /// Kids maths: end of a set of questions
+  ///
+  /// In ar, this message translates to:
+  /// **'خلصت المجموعة! أخدت نجمة'**
+  String get kidsMathsSetDone;
+
+  /// Kids maths: starts another set
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموعة جديدة'**
+  String get kidsMathsNewSet;
+
+  /// Kids maths: screen-reader label of set progress
+  ///
+  /// In ar, this message translates to:
+  /// **'السؤال {n} من {total}'**
+  String kidsMathsProgress(int n, int total);
+
+  /// Kids maths: screen-reader label of an answer button
+  ///
+  /// In ar, this message translates to:
+  /// **'الجواب {value}'**
+  String kidsMathsChoiceLabel(String value);
+
+  /// Kids colouring: title of the import card
+  ///
+  /// In ar, this message translates to:
+  /// **'أضيف صورة من جوالي'**
+  String get kidsColAddTitle;
+
+  /// Kids colouring: promise under the import card title
+  ///
+  /// In ar, this message translates to:
+  /// **'بتضلّ على جوالك، وما بتروح لأي مكان'**
+  String get kidsColAddSub;
+
+  /// Kids colouring: button that opens the file picker
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر ملف'**
+  String get kidsColPickFile;
+
+  /// Kids colouring: tag on things that open behind the parent gate
+  ///
+  /// In ar, this message translates to:
+  /// **'للأهل'**
+  String get kidsColParentOnly;
+
+  /// Kids colouring: heading of the pictures the parent added
+  ///
+  /// In ar, this message translates to:
+  /// **'صوري'**
+  String get kidsColMine;
+
+  /// Kids colouring: heading of the built-in geometric pages
+  ///
+  /// In ar, this message translates to:
+  /// **'صور المدار'**
+  String get kidsColMadar;
+
+  /// Kids colouring: small tag on a picture the parent added
+  ///
+  /// In ar, this message translates to:
+  /// **'صورتي'**
+  String get kidsColMineTag;
+
+  /// Kids colouring: name of a built-in page
+  ///
+  /// In ar, this message translates to:
+  /// **'نقش {number}'**
+  String kidsColPatternName(String number);
+
+  /// Kids colouring: name of an imported picture
+  ///
+  /// In ar, this message translates to:
+  /// **'صورة {number}'**
+  String kidsColPictureName(String number);
+
+  /// Kids colouring: saves and goes back to the gallery
+  ///
+  /// In ar, this message translates to:
+  /// **'خلصت'**
+  String get kidsColDone;
+
+  /// Kids colouring: undo button label
+  ///
+  /// In ar, this message translates to:
+  /// **'رجّع آخر لون'**
+  String get kidsColUndo;
+
+  /// Kids colouring: eraser button label
+  ///
+  /// In ar, this message translates to:
+  /// **'ممحاة'**
+  String get kidsColEraser;
+
+  /// Kids colouring: clears all colours of the page
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ من جديد'**
+  String get kidsColClear;
+
+  /// Kids colouring: goes back to the gallery
+  ///
+  /// In ar, this message translates to:
+  /// **'رجوع للمعرض'**
+  String get kidsColBack;
+
+  /// Kids colouring: screen-reader label of a colour button
+  ///
+  /// In ar, this message translates to:
+  /// **'لون {n}'**
+  String kidsColSwatch(int n);
+
+  /// Kids colouring: privacy line under the page
+  ///
+  /// In ar, this message translates to:
+  /// **'الصورة وألوانها محفوظة على جوالك فقط'**
+  String get kidsColSaved;
+
+  /// Kids colouring: soft title when an import fails
+  ///
+  /// In ar, this message translates to:
+  /// **'هالملف ما زبط'**
+  String get kidsColBadFile;
+
+  /// Kids colouring: the file was not an image
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا مش ملف صورة. اختر صورة تانية.'**
+  String get kidsColNotImage;
+
+  /// Kids colouring: the image was too large
+  ///
+  /// In ar, this message translates to:
+  /// **'هالصورة كبيرة كتير. اختر صورة أصغر.'**
+  String get kidsColTooBig;
+
+  /// Kids colouring: the image could not be read
+  ///
+  /// In ar, this message translates to:
+  /// **'ما قدرنا نفتح الصورة. جرّب صورة تانية.'**
+  String get kidsColCantRead;
+
+  /// Kids colouring: parent step after picking a file
+  ///
+  /// In ar, this message translates to:
+  /// **'جهّز الصورة للتلوين'**
+  String get kidsColPrepTitle;
+
+  /// Kids colouring: suggestion for a photograph
+  ///
+  /// In ar, this message translates to:
+  /// **'هاي شكلها صورة عادية. حوّلها لخطوط عشان تصير سهلة للتلوين.'**
+  String get kidsColPrepPhotoHint;
+
+  /// Kids colouring: suggestion for a line drawing
+  ///
+  /// In ar, this message translates to:
+  /// **'هاي شكلها رسمة بخطوط. فيك تستخدمها كما هي.'**
+  String get kidsColPrepLinesHint;
+
+  /// Kids colouring: keep the picture's own lines
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدمها كما هي'**
+  String get kidsColPrepAsIs;
+
+  /// Kids colouring: automatic outline of a photograph
+  ///
+  /// In ar, this message translates to:
+  /// **'حوّلها لخطوط'**
+  String get kidsColPrepOutline;
+
+  /// Kids colouring: outline detail, low
+  ///
+  /// In ar, this message translates to:
+  /// **'خطوط قليلة'**
+  String get kidsColLevelLow;
+
+  /// Kids colouring: outline detail, medium
+  ///
+  /// In ar, this message translates to:
+  /// **'خطوط وسط'**
+  String get kidsColLevelMid;
+
+  /// Kids colouring: outline detail, high
+  ///
+  /// In ar, this message translates to:
+  /// **'خطوط كتير'**
+  String get kidsColLevelHigh;
+
+  /// Kids colouring: adds the prepared picture to the gallery
+  ///
+  /// In ar, this message translates to:
+  /// **'احفظ الصورة'**
+  String get kidsColSavePicture;
+
+  /// Kids colouring: cancels the import
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get kidsColCancel;
+
+  /// Kids colouring: parent deletes an imported picture
+  ///
+  /// In ar, this message translates to:
+  /// **'احذف الصورة'**
+  String get kidsColDelete;
+
+  /// Kids colouring: parent confirmation
+  ///
+  /// In ar, this message translates to:
+  /// **'بدك تحذف هالصورة وألوانها؟'**
+  String get kidsColDeleteAsk;
+
+  /// Kids colouring: confirms the delete
+  ///
+  /// In ar, this message translates to:
+  /// **'احذفها'**
+  String get kidsColDeleteYes;
+
+  /// Kids colouring: shown while a picture is processed
+  ///
+  /// In ar, this message translates to:
+  /// **'لحظة، عم نجهّز الصورة…'**
+  String get kidsColWorking;
+
+  /// Title of the kids-mode card at the top of Settings
+  ///
+  /// In ar, this message translates to:
+  /// **'مدار الصغار'**
+  String get kidsShellEntryTitle;
+
+  /// No description provided for @kidsShellEntrySubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكان آمن للّعب والتعلّم'**
+  String get kidsShellEntrySubtitle;
+
+  /// The one tap that puts the phone into kids mode
+  ///
+  /// In ar, this message translates to:
+  /// **'ادخل'**
+  String get kidsShellEntryButton;
+
+  /// No description provided for @kidsShellEntryRule.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدخول بلمسة وحدة. الخروج بالرقم السري أو البصمة فقط.'**
+  String get kidsShellEntryRule;
+
+  /// No description provided for @kidsShellNeedPinTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لازم رقم سري أول'**
+  String get kidsShellNeedPinTitle;
+
+  /// No description provided for @kidsShellNeedPinBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل ما يدخل الصغار، لازم الأهل يحطّوا رقم سري. هو اللي بيفتح الباب لما يخلصوا.'**
+  String get kidsShellNeedPinBody;
+
+  /// No description provided for @kidsShellNeedPinAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'حطّ الرقم السري'**
+  String get kidsShellNeedPinAction;
+
+  /// No description provided for @kidsShellPinOfferBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'للأهل'**
+  String get kidsShellPinOfferBadge;
+
+  /// No description provided for @kidsShellPinOfferTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نثبّت الشاشة؟'**
+  String get kidsShellPinOfferTitle;
+
+  /// No description provided for @kidsShellPinOfferBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'تثبيت الشاشة بيخلّي الجوال على مدار الصغار فقط، وما بيطلع منه إلا الأهل.'**
+  String get kidsShellPinOfferBody;
+
+  /// No description provided for @kidsShellPinOfferYes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ثبّت الشاشة'**
+  String get kidsShellPinOfferYes;
+
+  /// No description provided for @kidsShellPinOfferNo.
+  ///
+  /// In ar, this message translates to:
+  /// **'مش هلأ، كمّل بدون تثبيت'**
+  String get kidsShellPinOfferNo;
+
+  /// No description provided for @kidsShellPinOfferLater.
+  ///
+  /// In ar, this message translates to:
+  /// **'بتقدر تغيّرها بعدين من إعدادات الأهل.'**
+  String get kidsShellPinOfferLater;
+
+  /// No description provided for @kidsShellGreeting.
+  ///
+  /// In ar, this message translates to:
+  /// **'أهلاً يا نجم!'**
+  String get kidsShellGreeting;
+
+  /// No description provided for @kidsShellGreetingSub.
+  ///
+  /// In ar, this message translates to:
+  /// **'وين بدّك تروح اليوم؟'**
+  String get kidsShellGreetingSub;
+
+  /// No description provided for @kidsShellLockSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'ركن الأهل'**
+  String get kidsShellLockSemantics;
+
+  /// Star count chip on the kids home
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا نجوم} =1{نجمة واحدة} =2{نجمتان} few{{count} نجمات} many{{count} نجمة} other{{count} نجمة}}'**
+  String kidsShellStars(int count);
+
+  /// Time-left chip on the kids home
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{خلص الوقت} =1{باقي دقيقة} =2{باقي دقيقتان} few{باقي {count} دقائق} many{باقي {count} دقيقة} other{باقي {count} دقيقة}}'**
+  String kidsShellTimeLeft(int count);
+
+  /// Gentle warning pill shortly before the daily time ends
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{هلأ بنخلّص} =1{باقي دقيقة} =2{باقي دقيقتان} few{باقي {count} دقائق} many{باقي {count} دقيقة} other{باقي {count} دقيقة}}'**
+  String kidsShellWarning(int count);
+
+  /// No description provided for @kidsShellEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لسا ما في عوالم هون'**
+  String get kidsShellEmptyTitle;
+
+  /// No description provided for @kidsShellEmptyBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'قريباً بنضيف ألعاب وقصص جديدة.'**
+  String get kidsShellEmptyBody;
+
+  /// No description provided for @kidsShellSectionMissing.
+  ///
+  /// In ar, this message translates to:
+  /// **'هالعالم مش موجود'**
+  String get kidsShellSectionMissing;
+
+  /// No description provided for @kidsShellHomeSemantics.
+  ///
+  /// In ar, this message translates to:
+  /// **'رجوع للرئيسية'**
+  String get kidsShellHomeSemantics;
+
+  /// No description provided for @kidsShellGateTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ركن الأهل'**
+  String get kidsShellGateTitle;
+
+  /// No description provided for @kidsShellGateBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب الرقم السري أو المس البصمة عشان تطلع من مدار الصغار'**
+  String get kidsShellGateBody;
+
+  /// No description provided for @kidsShellGateBack.
+  ///
+  /// In ar, this message translates to:
+  /// **'رجوع للّعب'**
+  String get kidsShellGateBack;
+
+  /// No description provided for @kidsShellGateTryAgain.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب مرّة ثانية'**
+  String get kidsShellGateTryAgain;
+
+  /// Calm pause after three wrong PINs; never blames the child
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{جرّب هلأ} =1{جرّب بعد ثانية} =2{جرّب بعد ثانيتين} few{خلّينا ناخد استراحة صغيرة. جرّب بعد {count} ثواني.} many{خلّينا ناخد استراحة صغيرة. جرّب بعد {count} ثانية.} other{خلّينا ناخد استراحة صغيرة. جرّب بعد {count} ثانية.}}'**
+  String kidsShellGatePause(int count);
+
+  /// No description provided for @kidsShellGateFingerprint.
+  ///
+  /// In ar, this message translates to:
+  /// **'البصمة'**
+  String get kidsShellGateFingerprint;
+
+  /// No description provided for @kidsShellGateDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح'**
+  String get kidsShellGateDelete;
+
+  /// No description provided for @kidsShellGateUnavailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما قدرنا نتأكّد هلأ. جرّب مرّة ثانية.'**
+  String get kidsShellGateUnavailable;
+
+  /// No description provided for @kidsShellGateBioReason.
+  ///
+  /// In ar, this message translates to:
+  /// **'لمسة من الأهل عشان نطلع من مدار الصغار'**
+  String get kidsShellGateBioReason;
+
+  /// No description provided for @kidsShellGateBioTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ركن الأهل'**
+  String get kidsShellGateBioTitle;
+
+  /// No description provided for @kidsShellGateBioHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'المس مستشعر البصمة'**
+  String get kidsShellGateBioHint;
+
+  /// No description provided for @kidsShellGateBioCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدم الرقم السري'**
+  String get kidsShellGateBioCancel;
+
+  /// No description provided for @kidsShellCornerTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ركن الأهل'**
+  String get kidsShellCornerTitle;
+
+  /// No description provided for @kidsShellCornerLeave.
+  ///
+  /// In ar, this message translates to:
+  /// **'اطلع من مدار الصغار'**
+  String get kidsShellCornerLeave;
+
+  /// No description provided for @kidsShellCornerLeaveHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بترجع لمدار العادي.'**
+  String get kidsShellCornerLeaveHint;
+
+  /// No description provided for @kidsShellCornerTimeTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت اللعب باليوم'**
+  String get kidsShellCornerTimeTitle;
+
+  /// The daily limit; zero means off
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{بدون حدّ} =1{دقيقة واحدة} =2{دقيقتان} few{{count} دقائق} many{{count} دقيقة} other{{count} دقيقة}}'**
+  String kidsShellCornerTimeValue(int count);
+
+  /// No description provided for @kidsShellCornerTimeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيبدأ من جديد كل يوم عند نص الليل. الصفر يعني بدون حدّ.'**
+  String get kidsShellCornerTimeHint;
+
+  /// Minutes of kids time used today
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لسا ما لعب اليوم} =1{لعب اليوم دقيقة واحدة} =2{لعب اليوم دقيقتين} few{لعب اليوم {count} دقائق} many{لعب اليوم {count} دقيقة} other{لعب اليوم {count} دقيقة}}'**
+  String kidsShellCornerTimeUsed(int count);
+
+  /// No description provided for @kidsShellCornerMore.
+  ///
+  /// In ar, this message translates to:
+  /// **'زيادة'**
+  String get kidsShellCornerMore;
+
+  /// No description provided for @kidsShellCornerLess.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقصان'**
+  String get kidsShellCornerLess;
+
+  /// No description provided for @kidsShellCornerPinTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تثبيت الشاشة'**
+  String get kidsShellCornerPinTitle;
+
+  /// No description provided for @kidsShellCornerPinOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشاشة مثبّتة هلأ.'**
+  String get kidsShellCornerPinOn;
+
+  /// No description provided for @kidsShellCornerPinOff.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشاشة مش مثبّتة.'**
+  String get kidsShellCornerPinOff;
+
+  /// No description provided for @kidsShellCornerPinAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'ثبّت الشاشة'**
+  String get kidsShellCornerPinAction;
+
+  /// No description provided for @kidsShellCornerPinUnsupported.
+  ///
+  /// In ar, this message translates to:
+  /// **'هالجوال ما بيدعم تثبيت الشاشة من هون.'**
+  String get kidsShellCornerPinUnsupported;
+
+  /// No description provided for @kidsShellCornerReligiousTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحتوى الديني'**
+  String get kidsShellCornerReligiousTitle;
+
+  /// No description provided for @kidsShellCornerReligiousHidden.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخفي لحد ما يتسمّى الشيخ المراجع.'**
+  String get kidsShellCornerReligiousHidden;
+
+  /// No description provided for @kidsShellCornerBack.
+  ///
+  /// In ar, this message translates to:
+  /// **'رجوع للّعب'**
+  String get kidsShellCornerBack;
+
+  /// No description provided for @kidsShellEndTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خلص وقت اللعب اليوم'**
+  String get kidsShellEndTitle;
+
+  /// No description provided for @kidsShellEndBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخذت استراحة حلوة. منكمّل بكرا!'**
+  String get kidsShellEndBody;
+
+  /// Stars kept, shown on the end screen
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{نجومك محفوظة} =1{نجمة محفوظة} =2{نجمتان محفوظتان} few{{count} نجمات محفوظة} many{{count} نجمة محفوظة} other{{count} نجمة محفوظة}}'**
+  String kidsShellEndStars(int count);
+
+  /// No description provided for @kidsShellEndOk.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمام'**
+  String get kidsShellEndOk;
+
+  /// No description provided for @kidsShellEndParent.
+  ///
+  /// In ar, this message translates to:
+  /// **'للأهل: زيادة الوقت'**
+  String get kidsShellEndParent;
+
+  /// No description provided for @kidsShellSpeak.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسمعها'**
+  String get kidsShellSpeak;
+
   /// Part 13: reciting out loud and being checked against the verified text
   ///
   /// In ar, this message translates to:
