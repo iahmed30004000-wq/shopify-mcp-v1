@@ -106,9 +106,24 @@ final ramadanFocusSpanProvider = Provider.autoDispose<RamadanSpan>((ref) {
 
 /// The khatmah of the focus Ramadan: what is stored, else the default plan
 /// (shown and used as is; the first change stores it).
+///
+/// A stored plan follows the Hijri shift: its first day is the month's first
+/// day as the calendar places it now, so moving the shift by a day moves the
+/// plan with it (what he has read stays, it is counted by plan day).
 final ramadanKhatmahProvider = Provider.autoDispose<KhatmahRecord>((ref) {
   final span = ref.watch(ramadanFocusSpanProvider);
-  return ref.watch(ramadanKhatmahsProvider).value?[span.hijriYear] ?? KhatmahRecord.defaultFor(span);
+  final stored = ref.watch(ramadanKhatmahsProvider).value?[span.hijriYear];
+  if (stored == null) return KhatmahRecord.defaultFor(span);
+  final plan = stored.plan;
+  if (plan.startDate == span.first && plan.days <= span.length) return stored;
+  return stored.copyWith(
+    plan: KhatmahPlan(
+      startDate: span.first,
+      totalPages: plan.totalPages,
+      days: plan.days > span.length ? span.length : plan.days,
+      ceilingPages: plan.ceilingPages,
+    ),
+  );
 });
 
 /// Today's portion and the re-planned rest.

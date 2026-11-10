@@ -6,6 +6,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:madar/core/notifications/notifications.dart';
+import 'package:madar/features/orbit/domain/prayer_schedule.dart' show DayTimes;
 import 'package:madar/features/ramadan/ramadan.dart';
 
 import 'ramadan_test_support.dart';
@@ -126,6 +127,39 @@ void main() {
       // What is pending is exactly the new plan.
       final span = const RamadanCalendar(offsetDays: -1).spanOfYear(1448);
       expect(ids(), expectedIds(span.length));
+    });
+  });
+
+  group('a traveller', () {
+    test('new prayer times for the new place move the iftar, the suhoor and the Taraweeh alarms; none of the old ones is left', () async {
+      await sync();
+      expect(platform.scheduled[iftarId(5)]!.request.at, DateTime(2027, 2, 12, 17, 5));
+      // Three hours east: every prayer is three hours earlier on the phone's clock.
+      DayTimes east(DateTime day) {
+        final t = fixedTimes(day);
+        DateTime m(DateTime d) => d.subtract(const Duration(hours: 3));
+        return DayTimes(day: t.day, fajr: m(t.fajr), sunrise: m(t.sunrise), dhuhr: m(t.dhuhr), asr: m(t.asr), maghrib: m(t.maghrib), isha: m(t.isha));
+      }
+
+      await scheduler.sync(config: const RamadanConfig(), calendar: const RamadanCalendar(), timesOf: east, texts: ar);
+      expect(platform.scheduled[iftarId(5)]!.request.at, DateTime(2027, 2, 12, 14, 5));
+      expect(platform.scheduled[suhoorId(5)]!.request.at, DateTime(2027, 2, 12, 1, 45));
+      expect(platform.scheduled[taraweehId(5)]!.request.at, DateTime(2027, 2, 11, 16, 15));
+      expect(ids(), expectedIds(29), reason: 'the same ids, on the new moments');
+      // The text names the new time.
+      expect(platform.scheduled[iftarId(5)]!.request.body, contains(ar.fmt.formatTime(DateTime(2027, 2, 12, 14, 20))));
+    });
+
+    test('the text names the PLACE\'s clock when the phone\'s differs (wallClock)', () async {
+      await scheduler.sync(
+        config: const RamadanConfig(),
+        calendar: const RamadanCalendar(),
+        timesOf: fixedTimes,
+        texts: en,
+        wallClock: (instant) => instant.add(const Duration(hours: 2)),
+      );
+      expect(platform.scheduled[iftarId(5)]!.request.body, contains('7:20'), reason: 'Maghrib 17:20 on the phone is 19:20 at the place');
+      expect(platform.scheduled[iftarId(5)]!.request.at, DateTime(2027, 2, 12, 17, 5), reason: 'the alarm itself is an instant');
     });
   });
 

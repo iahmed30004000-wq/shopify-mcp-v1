@@ -450,7 +450,7 @@ void main() {
 
       for (final tab in RamadanTab.values) {
         testWidgets('${tab.name} at 320 dp with the text at 1.3: no overflow, targets of 48 dp', (tester) async {
-          final s = await _pump(
+          await _pump(
             tester,
             language: language,
             size: const Size(320, 640),

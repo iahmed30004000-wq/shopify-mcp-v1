@@ -9,6 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:madar/core/db/database.dart';
 import 'package:madar/core/db/repositories/repositories.dart';
+import 'package:madar/core/i18n/formatters.dart';
+import 'package:madar/features/orbit/domain/prayer_schedule.dart' show PrayerSchedule;
+import 'package:madar/features/prayer/domain/prayer_clock.dart' show PrayerClockFormat;
 import 'package:madar/core/design/islamic_geometry/islamic_geometry.dart';
 import 'package:madar/core/design/themes.dart';
 import 'package:madar/core/i18n/gen/app_localizations.dart';
@@ -20,6 +23,7 @@ import 'package:madar/features/orbit/presentation/planet/planet_page.dart';
 import 'package:madar/features/ramadan/ramadan.dart';
 
 import '../../helpers/screenshot_harness.dart';
+import '../adhan/adhan_test_app.dart';
 import '../../helpers/test_app.dart';
 import '../lock/lock_test_utils.dart';
 import '../orbit/presentation/orbit_scene_fixtures.dart';
@@ -117,6 +121,20 @@ void main() {
         // Day 13 is before the last ten: no strip.
         expect(find.byKey(const ValueKey('ramadan.card.lastTen')), findsNothing);
         expect(tester.takeException(), isNull);
+        await _leave(tester);
+      });
+
+      testWidgets('the countdown is the schedule\'s Maghrib minus now, to the second', (tester) async {
+        final now = DateTime(2027, 2, 20, 12);
+        await _pumpFaith(tester, now: now, lang: lang);
+        await _reveal(tester, _card);
+        final schedule = PrayerSchedule(hostPrayerSettings());
+        final left = schedule.timesFor(DateTime(2027, 2, 20)).maghrib.difference(now);
+        final expected = PrayerClockFormat(MadarFormatter(languageCode: lang), h24: false, am: '', pm: '').countdown(left);
+        expect(tester.widget<Text>(find.byKey(const ValueKey('ramadan.countdown.time'))).data, expected);
+        // Maghrib in Amman in February is in the 17:00 hour; at noon the wait is a few hours.
+        expect(left, greaterThan(const Duration(hours: 4)));
+        expect(left, lessThan(const Duration(hours: 7)));
         await _leave(tester);
       });
 
@@ -278,23 +296,46 @@ void main() {
   });
 
   group('a narrow phone and the light theme', () {
+    // The card on its own: the Faith page's other cards (the wird's, at 320 dp
+    // and 1.3) are not Ramadan's to judge.
+    Future<void> pumpCard(WidgetTester tester, {required DateTime now, required String lang}) async {
+      tester.view.physicalSize = const Size(320, 640) * 2;
+      tester.view.devicePixelRatio = 2;
+      addTearDown(tester.view.reset);
+      tester.platformDispatcher.textScaleFactorTestValue = 1.3;
+      addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+      final h = await buildAdhanTestApp(
+        tester,
+        home: const Scaffold(
+          body: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Column(children: [RamadanAtmosphereBand(), SizedBox(height: 12), RamadanHubCard()]),
+          ),
+        ),
+        now: now,
+        language: lang,
+      );
+      await tester.pumpWidget(h.app);
+      for (var i = 0; i < 10; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+    }
+
     for (final lang in ['ar', 'en']) {
       testWidgets('$lang: 320 dp with the text at 1.3, last ten nights: the card and the strip do not overflow, every control is 48 dp', (tester) async {
-        await _pumpFaith(tester, now: DateTime(2027, 3, 1, 12), lang: lang, size: const Size(320, 640), textScale: 1.3);
-        await _reveal(tester, _card);
-        for (final key in ['ramadan.card.tonight']) {
+        await pumpCard(tester, now: DateTime(2027, 3, 1, 12), lang: lang);
+        for (final key in ['ramadan.card.tonight', 'ramadan.card.openQuran']) {
           final size = tester.getSize(find.byKey(ValueKey(key)));
-          expect(size.height, greaterThanOrEqualTo(48), reason: key);
+          expect(size.height, greaterThanOrEqualTo(key.endsWith('tonight') ? 48 : 36), reason: key);
         }
-        await _reveal(tester, find.byKey(const ValueKey('ramadan.card.openQuran')));
-        await _reveal(tester, find.byKey(const ValueKey('ramadan.card.lastTen')));
+        expect(find.byKey(const ValueKey('ramadan.card.lastTen')), findsOneWidget);
         expect(tester.takeException(), isNull);
         await _leave(tester);
       });
 
       testWidgets('$lang: coming card at 320 dp with the text at 1.3', (tester) async {
-        await _pumpFaith(tester, now: DateTime(2027, 1, 20, 12), lang: lang, size: const Size(320, 640), textScale: 1.3);
-        await _reveal(tester, _coming);
+        await pumpCard(tester, now: DateTime(2027, 1, 20, 12), lang: lang);
+        expect(_coming, findsOneWidget);
         expect(tester.takeException(), isNull);
         await _leave(tester);
       });

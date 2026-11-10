@@ -14,6 +14,9 @@ import 'package:madar/core/db/snapshot.dart';
 import 'package:madar/core/providers.dart';
 import 'package:madar/features/data/domain/backup_codec.dart';
 import 'package:madar/features/data/domain/backup_format.dart';
+import 'package:madar/features/home/home_providers.dart' show homeClockProvider;
+import 'package:madar/features/orbit/data/orbit_repository.dart';
+import 'package:madar/features/orbit/domain/prayer_schedule.dart' show PrayerSettings;
 import 'package:madar/features/ramadan/ramadan.dart';
 
 const _fastKdf = BackupKdfParams(memoryKiB: 64, iterations: 1, parallelism: 1);
@@ -180,6 +183,29 @@ void main() {
       await repo.saveConfig(const RamadanConfig(suhoorLeadMinutes: 60));
       await Future<void>.delayed(const Duration(milliseconds: 80));
       expect(container.read(ramadanConfigProvider).suhoorLeadMinutes, 60);
+    });
+  });
+
+  group('the stored khatmah follows the Hijri shift', () {
+    test('moving the shift by a day moves the plan\'s first day; what he read stays', () async {
+      final base = KhatmahRecord.defaultFor(span); // starts 8 February under no shift
+      await repo.setKhatmah(base.copyWith(progress: base.progress.markReadThrough(0, 21, totalPages: 604)));
+      final container = ProviderContainer(
+        overrides: [databaseProvider.overrideWithValue(db), homeClockProvider.overrideWithValue(() => DateTime(2027, 2, 20, 12))],
+      );
+      addTearDown(container.dispose);
+      container.listen(ramadanKhatmahProvider, (_, _) {});
+      container.listen(ramadanKhatmahsProvider, (_, _) {});
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+      expect(container.read(ramadanKhatmahProvider).plan.startDate, DateTime(2027, 2, 8));
+      expect(container.read(ramadanKhatmahProvider).progress.frontier, 21);
+
+      await OrbitRepository(repos).setPrayerSettings(const PrayerSettings(hijriOffsetDays: 1));
+      await Future<void>.delayed(const Duration(milliseconds: 150));
+      final moved = container.read(ramadanKhatmahProvider);
+      expect(moved.plan.startDate, DateTime(2027, 2, 7), reason: 'one day ahead: Ramadan began a day earlier');
+      expect(moved.progress.frontier, 21);
+      expect(moved.plan.ceilingPages, base.plan.ceilingPages);
     });
   });
 
