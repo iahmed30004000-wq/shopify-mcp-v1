@@ -48,10 +48,7 @@ class ScreenTimeLedger {
   ScreenTimeLedger add(int seconds, DateTime now) {
     final rolled = rolledTo(now);
     final more = seconds < 0 ? 0 : seconds;
-    return ScreenTimeLedger(
-      dayKey: rolled.dayKey,
-      usedSeconds: rolled.usedSeconds + more,
-    );
+    return ScreenTimeLedger(dayKey: rolled.dayKey, usedSeconds: rolled.usedSeconds + more);
   }
 
   Map<String, Object?> toJson() => {'day': dayKey, 'used': usedSeconds};
@@ -60,17 +57,12 @@ class ScreenTimeLedger {
     if (json is! Map) return empty;
     final day = json['day'];
     final used = json['used'];
-    return ScreenTimeLedger(
-      dayKey: day is int && day > 0 ? day : 0,
-      usedSeconds: used is int && used > 0 ? used : 0,
-    );
+    return ScreenTimeLedger(dayKey: day is int && day > 0 ? day : 0, usedSeconds: used is int && used > 0 ? used : 0);
   }
 
   @override
   bool operator ==(Object other) =>
-      other is ScreenTimeLedger &&
-      other.dayKey == dayKey &&
-      other.usedSeconds == usedSeconds;
+      other is ScreenTimeLedger && other.dayKey == dayKey && other.usedSeconds == usedSeconds;
 
   @override
   int get hashCode => Object.hash(dayKey, usedSeconds);
@@ -105,11 +97,7 @@ abstract final class ScreenTimeRules {
   /// [maxStepSeconds] and never negative. A clock that jumps (set forward, set
   /// back, a summer-time change) therefore neither burns the child's time nor
   /// gives any back.
-  static int tickSeconds(
-    DateTime last,
-    DateTime now, {
-    int maxStepSeconds = 2,
-  }) {
+  static int tickSeconds(DateTime last, DateTime now, {int maxStepSeconds = 2}) {
     final ms = now.difference(last).inMilliseconds;
     if (ms <= 0) return 0;
     final seconds = (ms / 1000).round();
@@ -166,10 +154,7 @@ class GateBackoff {
     if (until == null) return this;
     final left = until - now.millisecondsSinceEpoch;
     if (left > pause.inMilliseconds) {
-      return GateBackoff(
-        failures: failures,
-        pausedUntilMs: now.add(pause).millisecondsSinceEpoch,
-      );
+      return GateBackoff(failures: failures, pausedUntilMs: now.add(pause).millisecondsSinceEpoch);
     }
     return this;
   }
@@ -180,17 +165,12 @@ class GateBackoff {
     if (json is! Map) return none;
     final f = json['f'];
     final u = json['u'];
-    return GateBackoff(
-      failures: f is int && f > 0 ? f : 0,
-      pausedUntilMs: u is int ? u : null,
-    );
+    return GateBackoff(failures: f is int && f > 0 ? f : 0, pausedUntilMs: u is int ? u : null);
   }
 
   @override
   bool operator ==(Object other) =>
-      other is GateBackoff &&
-      other.failures == failures &&
-      other.pausedUntilMs == pausedUntilMs;
+      other is GateBackoff && other.failures == failures && other.pausedUntilMs == pausedUntilMs;
 
   @override
   int get hashCode => Object.hash(failures, pausedUntilMs);
@@ -216,25 +196,16 @@ class KidsModeState {
   final ScreenTimeLedger ledger;
   final GateBackoff backoff;
 
-  KidsModeState copyWith({
-    bool? on,
-    int? limitMinutes,
-    ScreenTimeLedger? ledger,
-    GateBackoff? backoff,
-  }) => KidsModeState(
-    on: on ?? this.on,
-    limitMinutes: limitMinutes ?? this.limitMinutes,
-    ledger: ledger ?? this.ledger,
-    backoff: backoff ?? this.backoff,
-  );
+  KidsModeState copyWith({bool? on, int? limitMinutes, ScreenTimeLedger? ledger, GateBackoff? backoff}) =>
+      KidsModeState(
+        on: on ?? this.on,
+        limitMinutes: limitMinutes ?? this.limitMinutes,
+        ledger: ledger ?? this.ledger,
+        backoff: backoff ?? this.backoff,
+      );
 
-  String encode() => jsonEncode({
-    'v': 1,
-    'on': on,
-    'limit': limitMinutes,
-    'ledger': ledger.toJson(),
-    'gate': backoff.toJson(),
-  });
+  String encode() =>
+      jsonEncode({'v': 1, 'on': on, 'limit': limitMinutes, 'ledger': ledger.toJson(), 'gate': backoff.toJson()});
 
   /// A missing or damaged record is [off] (nothing to keep a child inside),
   /// but a record that says "on" survives any damage elsewhere in it.
@@ -246,9 +217,7 @@ class KidsModeState {
       final limit = j['limit'];
       return KidsModeState(
         on: j['on'] == true,
-        limitMinutes: limit is int && limit > 0
-            ? limit.clamp(0, ScreenTimeRules.maxLimitMinutes)
-            : 0,
+        limitMinutes: limit is int && limit > 0 ? limit.clamp(0, ScreenTimeRules.maxLimitMinutes) : 0,
         ledger: ScreenTimeLedger.fromJson(j['ledger']),
         backoff: GateBackoff.fromJson(j['gate']),
       );

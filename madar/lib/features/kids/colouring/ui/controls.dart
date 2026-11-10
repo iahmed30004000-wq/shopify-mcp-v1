@@ -71,7 +71,11 @@ class ColouringControls extends StatelessWidget {
                 onTap: onEraser,
               ),
               const SizedBox(width: 12),
-              KidsRoundButton(icon: Icons.rotate_left_rounded, semanticLabel: l.kidsColUndo, onTap: canUndo ? onUndo : null),
+              KidsRoundButton(
+                icon: Icons.rotate_left_rounded,
+                semanticLabel: l.kidsColUndo,
+                onTap: canUndo ? onUndo : null,
+              ),
             ],
           ),
         ),

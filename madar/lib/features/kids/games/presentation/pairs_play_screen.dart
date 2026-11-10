@@ -213,29 +213,33 @@ class _Board extends StatelessWidget {
         // Portrait cards, never thinner than 0.62; when the screen is too short
         // the board scrolls rather than shrinking the targets below 64 dp.
         final aspect = (cellW / cellH).clamp(0.62, 1.0);
-        return GridView.builder(
-          padding: const EdgeInsets.only(bottom: 8),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: size.columns,
-            mainAxisSpacing: gap,
-            crossAxisSpacing: gap,
-            childAspectRatio: aspect,
-          ),
-          itemCount: game.deck.length,
-          itemBuilder: (context, i) => Semantics(
-            button: true,
-            label: cardLabel(i),
-            excludeSemantics: true,
-            onTap: () => onTap(i),
-            child: GestureDetector(
-              key: ValueKey('pair-card-$i'),
-              behavior: HitTestBehavior.opaque,
+        return Align(
+          alignment: Alignment.center,
+          child: GridView.builder(
+            shrinkWrap: true,
+            padding: const EdgeInsets.only(bottom: 8),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: size.columns,
+              mainAxisSpacing: gap,
+              crossAxisSpacing: gap,
+              childAspectRatio: aspect,
+            ),
+            itemCount: game.deck.length,
+            itemBuilder: (context, i) => Semantics(
+              button: true,
+              label: cardLabel(i),
+              excludeSemantics: true,
               onTap: () => onTap(i),
-              child: FlipCard(
-                faceUp: game.isFaceUp(i),
-                symbol: game.deck[i],
-                matched: game.isMatched(i),
-                duration: turn,
+              child: GestureDetector(
+                key: ValueKey('pair-card-$i'),
+                behavior: HitTestBehavior.opaque,
+                onTap: () => onTap(i),
+                child: FlipCard(
+                  faceUp: game.isFaceUp(i),
+                  symbol: game.deck[i],
+                  matched: game.isMatched(i),
+                  duration: turn,
+                ),
               ),
             ),
           ),

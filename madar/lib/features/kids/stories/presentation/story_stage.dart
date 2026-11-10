@@ -47,7 +47,8 @@ class StoryStagePainter extends CustomPainter {
     ..strokeCap = StrokeCap.round;
 
   Size? _builtFor;
-  late Path _hillFar, _hillNear, _lanternBody;
+  late Path _hillFar, _hillNear, _lanternBody, _flame;
+  late RRect _lanternCap, _lanternBase;
   late Float32List _spark; // x, y, size per twinkle
 
   void _build(Size s) {
@@ -65,7 +66,7 @@ class StoryStagePainter extends CustomPainter {
       ..lineTo(s.width, s.height)
       ..lineTo(0, s.height)
       ..close();
-    final w = s.width * 0.05, h = s.height * 0.085;
+    final w = s.width * 0.06, h = s.height * 0.1;
     _lanternBody = Path()
       ..moveTo(-w * 0.6, -h)
       ..lineTo(w * 0.6, -h)
@@ -73,6 +74,13 @@ class StoryStagePainter extends CustomPainter {
       ..lineTo(w * 0.6, h)
       ..lineTo(-w * 0.6, h)
       ..lineTo(-w, 0)
+      ..close();
+    _lanternCap = RRect.fromLTRBR(-w * 0.7, -h * 1.12, w * 0.7, -h, const Radius.circular(3));
+    _lanternBase = RRect.fromLTRBR(-w * 0.7, h, w * 0.7, h * 1.12, const Radius.circular(3));
+    _flame = Path()
+      ..moveTo(0, -h * 0.45)
+      ..quadraticBezierTo(w * 0.45, -h * 0.05, 0, h * 0.4)
+      ..quadraticBezierTo(-w * 0.45, -h * 0.05, 0, -h * 0.45)
       ..close();
     _spark = Float32List(StoryScript.maxSparkles * 3);
     final rnd = math.Random(7);
@@ -124,9 +132,9 @@ class StoryStagePainter extends CustomPainter {
     final lit = _lerp(beat.lanternFrom, beat.lanternTo, t);
     if (lit > 0.02) {
       final breathe = 1 + 0.06 * math.sin(amb * 2 * math.pi);
-      final rings = lowPower ? 2 : 4;
+      final rings = lowPower ? 3 : 7;
       for (var i = rings; i >= 1; i--) {
-        canvas.drawCircle(Offset(lx, ly), w * 0.05 * (1 + i * 0.7) * breathe, _fill..color = _a(_gold, lit * 0.1));
+        canvas.drawCircle(Offset(lx, ly), w * 0.06 * (1 + i * 0.35) * breathe, _fill..color = _a(_gold, lit * 0.06));
       }
     }
     canvas.save();
@@ -138,13 +146,22 @@ class StoryStagePainter extends CustomPainter {
         ..color = _a(_cream, 0.55 + 0.4 * lit)
         ..strokeWidth = 2,
     );
-    canvas.drawLine(Offset(0, -h * 0.085), Offset(0, -h * 0.11), _line..color = _a(_cream, 0.7));
+    // Cap, base, hook and the flame.
+    canvas.drawRRect(_lanternCap, _fill..color = const Color(0xFF17143F));
+    canvas.drawRRect(_lanternBase, _fill..color = const Color(0xFF17143F));
+    canvas.drawLine(Offset(0, _lanternCap.top), Offset(0, _lanternCap.top - h * 0.02), _line..color = _a(_cream, 0.7));
+    if (lit > 0.02) {
+      canvas.save();
+      canvas.scale(0.6 + 0.4 * lit);
+      canvas.drawPath(_flame, _fill..color = _a(_white, 0.55 + 0.45 * lit));
+      canvas.restore();
+    }
     canvas.restore();
 
     // The star's path, its ghosts and the star.
     final p0 = Offset(beat.from.x * w, beat.from.y * h);
     final p1 = Offset(beat.to.x * w, beat.to.y * h);
-    final r = w * 0.065;
+    final r = w * 0.085;
     if (beat.trail && !lowPower) {
       for (var g = 3; g >= 1; g--) {
         final u = (t - g * 0.12).clamp(0.0, 1.0);
@@ -161,9 +178,9 @@ class StoryStagePainter extends CustomPainter {
     final sp = _at(p0, p1, t, h);
     final pulse = 1 + 0.05 * math.sin(amb * 2 * math.pi);
     if (glow > 0.02) {
-      final rings = lowPower ? 2 : 5;
+      final rings = lowPower ? 3 : 9;
       for (var i = rings; i >= 1; i--) {
-        canvas.drawCircle(sp, r * (1 + i * 0.55) * pulse, _fill..color = _a(_gold, glow * 0.09));
+        canvas.drawCircle(sp, r * (1 + i * 0.3) * pulse, _fill..color = _a(_gold, glow * 0.055));
       }
     }
     canvas.save();

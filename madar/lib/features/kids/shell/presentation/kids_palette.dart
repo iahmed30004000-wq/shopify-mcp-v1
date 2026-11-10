@@ -33,25 +33,11 @@ abstract final class KidsText {
   static const String display = 'ReemKufi';
   static const String body = 'PlexArabic';
 
-  static TextStyle title(Color color, {double size = 30}) => TextStyle(
-    fontFamily: display,
-    fontSize: size,
-    height: 1.3,
-    fontWeight: FontWeight.w700,
-    color: color,
-  );
+  static TextStyle title(Color color, {double size = 30}) =>
+      TextStyle(fontFamily: display, fontSize: size, height: 1.3, fontWeight: FontWeight.w700, color: color);
 
-  static TextStyle text(
-    Color color, {
-    double size = 20,
-    FontWeight weight = FontWeight.w500,
-  }) => TextStyle(
-    fontFamily: body,
-    fontSize: size,
-    height: 1.5,
-    fontWeight: weight,
-    color: color,
-  );
+  static TextStyle text(Color color, {double size = 20, FontWeight weight = FontWeight.w500}) =>
+      TextStyle(fontFamily: body, fontSize: size, height: 1.5, fontWeight: weight, color: color);
 }
 
 /// The smallest thing a child may be asked to hit.
@@ -60,12 +46,7 @@ const double kKidsMinTarget = 64;
 /// The khatam: two squares turned 45 degrees (an eight-point star). One shape,
 /// repeated everywhere, drawn without allocating per frame.
 class KhatamStar extends StatelessWidget {
-  const KhatamStar({
-    super.key,
-    required this.size,
-    required this.color,
-    this.child,
-  });
+  const KhatamStar({super.key, required this.size, required this.color, this.child});
 
   final double size;
   final Color color;
@@ -96,15 +77,9 @@ class _KhatamPainter extends CustomPainter {
     canvas
       ..save()
       ..translate(c.dx, c.dy)
-      ..drawRect(
-        Rect.fromCenter(center: Offset.zero, width: side, height: side),
-        _paint,
-      )
+      ..drawRect(Rect.fromCenter(center: Offset.zero, width: side, height: side), _paint)
       ..rotate(math.pi / 4)
-      ..drawRect(
-        Rect.fromCenter(center: Offset.zero, width: side, height: side),
-        _paint,
-      )
+      ..drawRect(Rect.fromCenter(center: Offset.zero, width: side, height: side), _paint)
       ..restore();
   }
 
@@ -133,8 +108,7 @@ class KidsNightBackdrop extends StatelessWidget {
 }
 
 class _StarsPainter extends CustomPainter {
-  _StarsPainter()
-    : _paint = Paint()..color = KidsColors.night300.withValues(alpha: 0.55);
+  _StarsPainter() : _paint = Paint()..color = KidsColors.night300.withValues(alpha: 0.55);
 
   final Paint _paint;
 
@@ -196,11 +170,7 @@ class KidsBigButton extends StatelessWidget {
       KidsButtonTone.gold => (KidsColors.sun500, null, KidsColors.night900),
       KidsButtonTone.teal => (KidsColors.teal700, null, Colors.white),
       KidsButtonTone.paper => (KidsColors.paper, null, KidsColors.ink),
-      KidsButtonTone.ghost => (
-        Colors.transparent,
-        KidsColors.sand2,
-        KidsColors.ink2,
-      ),
+      KidsButtonTone.ghost => (Colors.transparent, KidsColors.sand2, KidsColors.ink2),
     };
     final enabled = onPressed != null;
     return Semantics(
@@ -212,37 +182,21 @@ class KidsBigButton extends StatelessWidget {
         opacity: enabled ? 1 : 0.5,
         child: Material(
           color: fill,
-          shape: StadiumBorder(
-            side: border == null
-                ? BorderSide.none
-                : BorderSide(color: border, width: 2),
-          ),
+          shape: StadiumBorder(side: border == null ? BorderSide.none : BorderSide(color: border, width: 2)),
           child: InkWell(
             customBorder: const StadiumBorder(),
             onTap: onPressed,
             child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: height < kKidsMinTarget ? kKidsMinTarget : height,
-              ),
+              constraints: BoxConstraints(minHeight: height < kKidsMinTarget ? kKidsMinTarget : height),
               child: Padding(
-                padding: const EdgeInsetsDirectional.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
-                ),
+                padding: const EdgeInsetsDirectional.symmetric(horizontal: 24, vertical: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    if (icon != null) ...[
-                      Icon(icon, color: fg, size: 28),
-                      const SizedBox(width: 12),
-                    ],
+                    if (icon != null) ...[Icon(icon, color: fg, size: 28), const SizedBox(width: 12)],
                     Flexible(
-                      child: Text(
-                        label,
-                        textAlign: TextAlign.center,
-                        style: KidsText.title(fg, size: 24),
-                      ),
+                      child: Text(label, textAlign: TextAlign.center, style: KidsText.title(fg, size: 24)),
                     ),
                   ],
                 ),

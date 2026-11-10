@@ -75,28 +75,15 @@ class KidsEntryCard extends ConsumerWidget {
                     const KhatamStar(
                       size: 64,
                       color: KidsColors.sun500,
-                      child: Icon(
-                        Icons.stars_rounded,
-                        color: KidsColors.teal700,
-                        size: 28,
-                      ),
+                      child: Icon(Icons.stars_rounded, color: KidsColors.teal700, size: 28),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            l.kidsShellEntryTitle,
-                            style: KidsText.title(
-                              KidsColors.night900,
-                              size: 28,
-                            ),
-                          ),
-                          Text(
-                            l.kidsShellEntrySubtitle,
-                            style: KidsText.text(KidsColors.ink2, size: 16),
-                          ),
+                          Text(l.kidsShellEntryTitle, style: KidsText.title(KidsColors.night900, size: 28)),
+                          Text(l.kidsShellEntrySubtitle, style: KidsText.text(KidsColors.ink2, size: 16)),
                         ],
                       ),
                     ),

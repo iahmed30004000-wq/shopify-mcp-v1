@@ -45,6 +45,7 @@ abstract final class KidsColors {
 abstract final class KidsText {
   static const display = TextStyle(
     fontFamily: 'ReemKufi',
+    wordSpacing: 6.1,
     fontWeight: FontWeight.w700,
     fontSize: 34,
     height: 1.25,
@@ -52,6 +53,7 @@ abstract final class KidsText {
   );
   static const title = TextStyle(
     fontFamily: 'ReemKufi',
+    wordSpacing: 4.7,
     fontWeight: FontWeight.w700,
     fontSize: 26,
     height: 1.3,
@@ -59,6 +61,7 @@ abstract final class KidsText {
   );
   static const subtitle = TextStyle(
     fontFamily: 'ReemKufi',
+    wordSpacing: 4.0,
     fontWeight: FontWeight.w600,
     fontSize: 22,
     height: 1.35,
@@ -80,6 +83,7 @@ abstract final class KidsText {
   );
   static const button = TextStyle(
     fontFamily: 'ReemKufi',
+    wordSpacing: 4.3,
     fontWeight: FontWeight.w700,
     fontSize: 24,
     height: 1.2,
@@ -155,6 +159,8 @@ class _KhatamPainter extends CustomPainter {
 }
 
 /// Header of a child screen: the home button, the title and the star chip.
+/// On a narrow screen or with big text the title gets its own line, so a long
+/// title is never squeezed into a few letters.
 class PlayHeader extends ConsumerWidget {
   const PlayHeader({super.key, required this.title, this.dark = false, this.onHome, this.showStars = true});
 
@@ -169,32 +175,42 @@ class PlayHeader extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l = L10n.of(context);
     final stars = showStars ? ref.watch(kidsStarCountProvider) : 0;
+    final home = RoundPlayButton(
+      icon: Icons.home_rounded,
+      tooltip: l.kidsPlayHome,
+      background: dark ? KidsColors.night100 : KidsColors.paper,
+      foreground: KidsColors.night800,
+      onPressed: onHome ?? () => Navigator.of(context).maybePop(),
+    );
+    final chip = showStars ? StarChip(count: stars, outlined: dark) : const SizedBox(width: 64);
+    final titleText = Text(
+      title,
+      textAlign: TextAlign.center,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      style: KidsText.title.copyWith(color: dark ? Colors.white : KidsColors.ink),
+    );
+    final compact = MediaQuery.sizeOf(context).width < 340 || MediaQuery.textScalerOf(context).scale(1) > 1.15;
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
-      child: Row(
-        children: [
-          RoundPlayButton(
-            icon: Icons.home_rounded,
-            tooltip: l.kidsPlayHome,
-            background: dark ? KidsColors.night100 : KidsColors.paper,
-            foreground: KidsColors.night800,
-            onPressed: onHome ?? () => Navigator.of(context).maybePop(),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: KidsText.title.copyWith(color: dark ? Colors.white : KidsColors.ink),
-              ),
+      child: compact
+          ? Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [home, chip]),
+                const SizedBox(height: 4),
+                titleText,
+              ],
+            )
+          : Row(
+              children: [
+                home,
+                Expanded(
+                  child: Padding(padding: const EdgeInsets.symmetric(horizontal: 8), child: titleText),
+                ),
+                chip,
+              ],
             ),
-          ),
-          if (showStars) StarChip(count: stars, outlined: dark) else const SizedBox(width: 64),
-        ],
-      ),
     );
   }
 }

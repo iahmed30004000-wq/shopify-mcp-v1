@@ -267,7 +267,7 @@ class _InteractiveStoryScreenState extends ConsumerState<InteractiveStoryScreen>
               ),
             ),
             ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: height * 0.62),
+              constraints: BoxConstraints(maxHeight: height * 0.56),
               child: Container(
                 width: double.infinity,
                 decoration: const BoxDecoration(
@@ -278,7 +278,7 @@ class _InteractiveStoryScreenState extends ConsumerState<InteractiveStoryScreen>
                   top: false,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-                    child: _runner.isFinished ? SingleChildScrollView(child: _finished(l)) : _panel(l, lang, beat),
+                    child: SingleChildScrollView(child: _runner.isFinished ? _finished(l) : _panel(l, lang, beat)),
                   ),
                 ),
               ),
@@ -289,8 +289,8 @@ class _InteractiveStoryScreenState extends ConsumerState<InteractiveStoryScreen>
     );
   }
 
-  /// The words scroll if they are long; the buttons stay where the child's
-  /// thumb expects them.
+  /// Words and buttons; on a very small screen with big text the whole panel
+  /// scrolls (the stage above keeps its share).
   Widget _panel(L10n l, String lang, StoryBeat beat) {
     final say = beat.say;
     final asking = _runner.isAskingToSay && say != null;
@@ -298,14 +298,10 @@ class _InteractiveStoryScreenState extends ConsumerState<InteractiveStoryScreen>
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Flexible(
-          child: SingleChildScrollView(
-            child: Text(
-              beat.narration.of(lang),
-              textAlign: TextAlign.center,
-              style: KidsText.body.copyWith(fontSize: 21, height: 1.7),
-            ),
-          ),
+        Text(
+          beat.narration.of(lang),
+          textAlign: TextAlign.center,
+          style: KidsText.body.copyWith(fontSize: 21, height: 1.7),
         ),
         const SizedBox(height: 12),
         if (asking) ...[
