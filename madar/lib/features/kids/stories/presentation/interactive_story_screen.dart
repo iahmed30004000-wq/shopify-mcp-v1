@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart' show ValueListenable;
 import 'package:flutter/material.dart';
@@ -249,7 +250,6 @@ class _InteractiveStoryScreenState extends ConsumerState<InteractiveStoryScreen>
     final l = L10n.of(context);
     final lang = Localizations.localeOf(context).languageCode;
     final beat = _runner.beat;
-    final height = MediaQuery.sizeOf(context).height;
     return Scaffold(
       backgroundColor: KidsColors.night900,
       body: SafeArea(
@@ -260,27 +260,43 @@ class _InteractiveStoryScreenState extends ConsumerState<InteractiveStoryScreen>
             _Dots(count: widget.script.beats.length, index: _runner.beatIndex),
             const SizedBox(height: 6),
             Expanded(
-              child: Semantics(
-                label: l.kidsPlayStoryStageLabel,
-                image: true,
-                child: StoryStage(beat: beat, move: _move, ambient: _ambient, lowPower: _lowPower),
-              ),
-            ),
-            ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: height * 0.56),
-              child: Container(
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: KidsColors.paper,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(36)),
-                ),
-                child: SafeArea(
-                  top: false,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-                    child: SingleChildScrollView(child: _runner.isFinished ? _finished(l) : _panel(l, lang, beat)),
-                  ),
-                ),
+              // The stage keeps at least a third of what is left; the panel
+              // under it scrolls when text is big and the screen is small.
+              child: LayoutBuilder(
+                builder: (context, box) {
+                  final stageMin = math.max(150.0, box.maxHeight * 0.36);
+                  final panelMax = math.max(box.maxHeight - stageMin, box.maxHeight * 0.4);
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: Semantics(
+                          label: l.kidsPlayStoryStageLabel,
+                          image: true,
+                          child: StoryStage(beat: beat, move: _move, ambient: _ambient, lowPower: _lowPower),
+                        ),
+                      ),
+                      ConstrainedBox(
+                        constraints: BoxConstraints(maxHeight: panelMax),
+                        child: Container(
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                            color: KidsColors.paper,
+                            borderRadius: BorderRadius.vertical(top: Radius.circular(36)),
+                          ),
+                          child: SafeArea(
+                            top: false,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
+                              child: SingleChildScrollView(
+                                child: _runner.isFinished ? _finished(l) : _panel(l, lang, beat),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
           ],
